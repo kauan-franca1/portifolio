@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kauan Silva França — Portfólio</title>
+<meta name="description" content="Analista de Dados & Desenvolvedor — Python, SQL, Java, IA aplicada e automação de sistemas.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#FAFAFA;
+    --bg-alt:#F1F1EF;
+    --surface:#FFFFFF;
+    --ink:#15161A;
+    --ink-soft:#63656E;
+    --line:rgba(21,22,26,0.10);
+    --accent:#000000;
+    --accent-ink:#000000;
+    --bg-dark:#0B0B0D;
+    --surface-dark:#18191D;
+    --paper:#F4F4F2;
+    --paper-soft:#9A9AA3;
+    --line-dark:rgba(244,244,242,0.12);
+    --radius:14px;
+    --ease:cubic-bezier(.16,.84,.44,1);
+  }
+
+  /* --- FORÇANDO LETRAS BRANCAS NO DARK THEME --- */
+  html[data-theme="dark"] {
+    --ink: #FFFFFF;
+    --ink-soft: #EBEBEB;
+    --paper: #FFFFFF;
+    --paper-soft: #EBEBEB;
+    --accent: #FFFFFF;
+    --accent-ink: #FFFFFF;
+  }
+  
+  html[data-theme="dark"] body,
+  html[data-theme="dark"] h1,
+  html[data-theme="dark"] h2,
+  html[data-theme="dark"] h3,
+  html[data-theme="dark"] p,
+  html[data-theme="dark"] a,
+  html[data-theme="dark"] span,
+  html[data-theme="dark"] .tag,
+  html[data-theme="dark"] .proj-metric span,
+  html[data-theme="dark"] footer .wrap span,
+  html[data-theme="dark"] .proj-num {
+    color: #FFFFFF !important;
+  }
+
+  html[data-theme="dark"] .ink-soft {
+    color: #EBEBEB !important;
+  }
+
+  html[data-theme="dark"] .btn-accent,
+  html[data-theme="dark"] .btn-primary {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+  }
+
+  /* Ajustes das seções escuras fixas para manterem branco */
+  .band-dark h2,
+  .band-dark h3,
+  .band-dark p,
+  .band-dark span,
+  .band-dark .tag,
+  .band-dark .t-date {
+    color: #FFFFFF !important;
+  }
+  .band-dark .ink-soft { color: #EBEBEB !important; }
+  /* --------------------------------------------- */
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  html[data-theme="dark"] body{ background:var(--bg-dark); }
+
+  h1,h2,h3{
+    font-family:'Space Grotesk', sans-serif;
+    margin:0;
+    letter-spacing:-0.02em;
+    font-weight:600;
+  }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--accent-ink);
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+  }
+  html[data-theme="dark"] .eyebrow{ color:var(--accent); }
+  .eyebrow::before{
+    content:"";
+    width:6px;height:6px;border-radius:50%;
+    background:var(--accent);
+    box-shadow:0 0 0 3px rgba(0,0,0,0.18);
+  }
+
+  a{ color:inherit; }
+  .wrap{ max-width:1120px; margin:0 auto; padding:0 32px; }
+  section{ position:relative; padding:120px 0; }
+  @media(max-width:640px){ section{ padding:80px 0; } .wrap{ padding:0 22px; } }
+
+  .band-dark{ background:var(--bg-dark); color:var(--paper); }
+  .band-dark .eyebrow{ color:var(--accent); }
+
+  .ink-soft{ color:var(--ink-soft); }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    padding:22px 0;
+    transition:background .4s var(--ease), border-color .4s var(--ease), padding .3s var(--ease);
+    border-bottom:1px solid transparent;
+  }
+  header.scrolled{
+    background:rgba(250,250,250,0.72);
+    backdrop-filter:blur(14px) saturate(160%);
+    -webkit-backdrop-filter:blur(14px) saturate(160%);
+    border-color:var(--line);
+    padding:14px 0;
+  }
+  html[data-theme="dark"] header.scrolled{
+    background:rgba(11,11,13,0.72);
+    border-color:var(--line-dark);
+  }
+  nav.wrap{ display:flex; align-items:center; justify-content:space-between; }
+  .brand{ font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:17px; text-decoration:none; }
+  .nav-links{ display:flex; align-items:center; gap:34px; list-style:none; margin:0; padding:0; }
+  .nav-links a{
+    font-size:14px; text-decoration:none; color:var(--ink-soft);
+    transition:color .25s var(--ease);
+  }
+  .nav-links a:hover{ color:var(--accent-ink); }
+  .theme-toggle{
+    width:38px; height:38px; border-radius:50%;
+    border:1px solid var(--line);
+    background:var(--surface);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    transition:transform .25s var(--ease), border-color .25s var(--ease);
+  }
+  .theme-toggle:hover{ transform:scale(1.06); border-color:var(--accent); }
+  html[data-theme="dark"] .theme-toggle{ background:var(--surface-dark); border-color:var(--line-dark); }
+  .theme-toggle svg{ width:16px; height:16px; }
+
+  @media(max-width:760px){ .nav-links{ display:none; } }
+
+  /* ---------- CURRENT / signature thread ---------- */
+  .current-rail{
+    position:fixed; top:0; left:28px; bottom:0; width:2px; z-index:40;
+    background:var(--line); pointer-events:none;
+  }
+  html[data-theme="dark"] .current-rail{ background:var(--line-dark); }
+  .current-fill{
+    position:absolute; top:0; left:0; width:100%; height:0%;
+    background:linear-gradient(180deg, var(--accent), rgba(0,0,0,0.15));
+    transition:height .05s linear;
+  }
+  .current-dot{
+    position:absolute; left:50%; transform:translate(-50%,-50%);
+    width:9px; height:9px; border-radius:50%;
+    background:var(--accent);
+    box-shadow:0 0 0 5px rgba(0,0,0,0.20), 0 0 14px rgba(0,0,0,0.55);
+  }
+  @media(max-width:900px){ .current-rail{ display:none; } }
+
+  /* ---------- BUTTONS ---------- */
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:14px 26px; border-radius:999px;
+    font-family:'Inter'; font-size:14.5px; font-weight:500;
+    text-decoration:none; cursor:pointer; border:1px solid transparent;
+    transition:transform .3s var(--ease), background .3s var(--ease), border-color .3s var(--ease);
+  }
+  .btn:hover{ transform:translateY(-2px); }
+  .btn-primary{ background:var(--ink); color:var(--bg); }
+  .btn-ghost{ border-color:var(--line); color:var(--ink); }
+  html[data-theme="dark"] .btn-ghost{ border-color:var(--line-dark); }
+  .btn-ghost:hover{ border-color:var(--accent); }
+  .btn-accent{ background:var(--accent); color:#FFFFFF; }
+
+  /* ---------- HERO ---------- */
+  .hero{ padding-top:220px; padding-bottom:100px; }
+  .hero h1{ font-size:clamp(42px,7.4vw,88px); line-height:1.02; margin-top:22px; }
+  .hero .role{ font-size:clamp(20px,2.6vw,28px); color:var(--ink-soft); font-family:'Space Grotesk'; font-weight:500; margin-top:14px; }
+  .hero p.desc{ max-width:560px; margin-top:22px; font-size:17px; color:var(--ink-soft); }
+  .hero .actions{ margin-top:38px; display:flex; gap:14px; flex-wrap:wrap; }
+
+  .hero-visual{
+    margin-top:80px; border-radius:20px; overflow:hidden;
+    border:1px solid var(--line); background:var(--surface);
+    display:flex; align-items:center; justify-content:center;
+  }
+  html[data-theme="dark"] .hero-visual{ border-color:var(--line-dark); background:var(--surface-dark); }
+  
+  .bonsai-art {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: clamp(5px, 1.1vw, 12px); /* Ajustado para caber a nova arte sem quebrar */
+    line-height: 1.15;
+    color: var(--ink);
+    text-align: center;
+    margin: 0;
+    padding: 60px 20px;
+    user-select: none;
+    white-space: pre;
+  }
+
+  /* ---------- REVEAL ---------- */
+  .reveal{ opacity:0; transform:translateY(28px); transition:opacity .8s var(--ease), transform .8s var(--ease); }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  /* ---------- SOBRE ---------- */
+  .sobre-grid{ display:grid; grid-template-columns:1fr 1fr; gap:70px; margin-top:44px; align-items:start; }
+  .sobre-grid p{ margin:0 0 20px; color:var(--ink-soft); }
+  .sobre-grid p:last-child{ margin-bottom:0; }
+  @media(max-width:840px){ .sobre-grid{ grid-template-columns:1fr; gap:28px; } }
+
+  /* ---------- STACK ---------- */
+  .stack-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:1px; margin-top:52px; background:var(--line-dark); border:1px solid var(--line-dark); border-radius:var(--radius); overflow:hidden; }
+  @media(max-width:760px){ .stack-grid{ grid-template-columns:1fr; } }
+  .stack-cell{ background:var(--bg-dark); padding:36px; }
+  .stack-cell h3{ font-size:16px; color:var(--accent); margin-bottom:18px; }
+  .tag-row{ display:flex; flex-wrap:wrap; gap:9px; }
+  .tag{
+    font-family:'IBM Plex Mono'; font-size:12.5px; padding:7px 12px;
+    border:1px solid var(--line-dark); border-radius:7px; color:var(--paper-soft);
+    transition:border-color .25s var(--ease), color .25s var(--ease);
+  }
+  .tag:hover{ border-color:var(--accent); color:var(--paper); }
+
+  /* ---------- PROJETOS ---------- */
+  .proj-list{ margin-top:50px; display:flex; flex-direction:column; }
+  .proj{
+    display:grid; grid-template-columns:70px 1fr auto; gap:28px; align-items:start;
+    padding:38px 0; border-top:1px solid var(--line);
+  }
+  html[data-theme="dark"] .proj{ border-color:var(--line-dark); }
+  .proj:last-child{ border-bottom:1px solid var(--line); }
+  html[data-theme="dark"] .proj:last-child{ border-color:var(--line-dark); }
+  .proj-num{ font-family:'IBM Plex Mono'; font-size:13px; color:var(--ink-soft); padding-top:6px; }
+  .proj-body h3{ font-size:23px; margin-bottom:10px; }
+  .proj-body p{ color:var(--ink-soft); max-width:640px; margin:0 0 16px; }
+  .proj-metric{
+    display:inline-flex; align-items:baseline; gap:6px; margin-bottom:16px;
+    font-family:'Space Grotesk'; font-weight:600; font-size:26px; color:var(--accent-ink);
+  }
+  .proj-metric span{ font-family:'Inter'; font-weight:500; font-size:13px; color:var(--ink-soft); }
+  .proj-link{ white-space:nowrap; font-size:14px; text-decoration:none; padding-top:8px; display:inline-flex; align-items:center; gap:6px; color:var(--ink); border-bottom:1px solid var(--accent); }
+
+  @media(max-width:700px){
+    .proj{ grid-template-columns:1fr; gap:12px; }
+    .proj-link{ padding-top:0; }
+  }
+
+  /* ---------- EXPERIÊNCIA ---------- */
+  .timeline{ margin-top:56px; position:relative; padding-left:34px; }
+  .timeline::before{ content:""; position:absolute; left:5px; top:6px; bottom:6px; width:1px; background:var(--line-dark); }
+  .t-item{ position:relative; padding-bottom:46px; }
+  .t-item:last-child{ padding-bottom:0; }
+  .t-item::before{
+    content:""; position:absolute; left:-34px; top:5px; width:11px; height:11px; border-radius:50%;
+    background:var(--accent); box-shadow:0 0 0 4px var(--bg-dark);
+  }
+  .t-date{ font-family:'IBM Plex Mono'; font-size:12.5px; color:var(--accent); letter-spacing:0.06em; }
+  .t-item h3{ font-size:21px; margin:8px 0 6px; }
+  .t-item p{ color:var(--paper-soft); max-width:600px; margin:0; }
+
+  /* ---------- CONTATO ---------- */
+  .contato-inner{ text-align:center; max-width:640px; margin:0 auto; }
+  .contato-inner h2{ font-size:clamp(34px,5.4vw,58px); margin-top:20px; }
+  .contato-actions{ margin-top:40px; display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+
+  footer{ padding:34px 0; border-top:1px solid var(--line); }
+  html[data-theme="dark"] footer{ border-color:var(--line-dark); }
+  footer .wrap{ display:flex; justify-content:space-between; align-items:center; font-size:13px; color:var(--ink-soft); }
+  @media(max-width:600px){ footer .wrap{ flex-direction:column; gap:10px; text-align:center; } }
+
+  ::selection{ background:var(--accent); color:#FFFFFF; }
+</style>
+</head>
+<body>
+
+<div class="current-rail"><div class="current-fill" id="currentFill"><div class="current-dot"></div></div></div>
+
+<header id="siteHeader">
+  <nav class="wrap">
+    <a href="#hero" class="brand">Kauan França</a>
+    <ul class="nav-links">
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#stack">Stack</a></li>
+      <li><a href="#projetos">Projetos</a></li>
+      <li><a href="#experiencia">Experiência</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
+      <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <circle cx="12" cy="12" r="4.2"></circle>
+        <path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/>
+      </svg>
+    </button>
+  </nav>
+</header>
+
+<section class="hero" id="hero">
+  <div class="wrap">
+    <span class="eyebrow reveal">Portfólio — Dados & Engenharia</span>
+    <h1 class="reveal">Kauan Silva<br>França</h1>
+    <p class="role reveal">Analista de Dados &amp; Desenvolvedor</p>
+    <p class="desc reveal">Bacharelando em Ciência e Tecnologia (UFABC), estagiário de tecnologia na Neosolar. Transformo bancos de dados brutos em modelos preditivos, automações e sistemas que resolvem problemas reais — com Python, SQL, Java e IA aplicada.</p>
+    <div class="actions reveal">
+      <a href="#projetos" class="btn btn-primary">Ver projetos</a>
+      <a href="#contato" class="btn btn-ghost">Falar comigo</a>
+    </div>
+
+    <div class="hero-visual reveal">
+      <pre class="bonsai-art">
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠤⠤⣄⠀⢀⠔⠱⢦⡀⢠⡞⠤⠽⢦⠀⢀⣤⣤⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡸⠒⣄⡈⣷⠞⠀⠀⠀⣹⠏⠀⠐⠈⣼⠗⢩⣤⣾⢹⡄⣠⣖⠇⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣇⡯⠂⢙⢿⠀⠀⠀⡰⡍⠀⠀⠠⣡⡎⡌⣭⠃⡇⣷⠟⠁⣟⡇⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⢰⡩⠐⣤⡀⡾⣡⢃⢧⠀⡰⣴⡀⢀⣶⣹⠟⣶⢆⣴⣷⢠⣼⢿⡖⢱⠃⢠⠔⣟⡇⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⢀⠤⡤⣗⡃⣴⣯⣿⡕⣺⡞⣾⡧⠛⠫⣯⡿⠛⢙⢿⠿⣼⡿⠋⢹⡚⡠⢸⣄⠚⠴⣼⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠈⡞⠄⠉⡣⣿⣾⢿⡂⠉⢷⢪⣰⠆⠀⠉⠑⡴⠉⠀⠀⢈⢣⡀⡾⣎⠀⢨⡏⠠⢁⠃⠀⣀⣠⢤⣦⡄⠤⠤⣤
+⡖⠖⠼⢦⣀⠀⠫⡱⢬⣻⣆⠙⢣⣊⣴⡈⢀⢸⠔⠠⠀⠀⠀⠘⣹⠏⠄⣤⣔⡷⣡⠞⣺⠽⢒⣪⣟⡟⠀⢀⣷⠋
+⠘⢅⡢⠈⢗⠀⠘⢻⣶⡨⡰⢦⣄⠠⠶⠈⠠⠘⠀⠀⠀⠀⢐⢺⠁⠀⠈⡆⡛⡵⠟⣊⠔⡪⢞⣥⡾⡀⣴⠟⠁⠀
+⠀⠀⠙⠷⣄⡓⢄⠘⣿⣿⣦⡠⢀⠑⢤⣰⠔⠊⠉⠑⠤⢀⢈⢇⠀⠀⠀⣨⠮⠒⣉⠔⠛⣢⣞⣡⠴⠊⠀⠀⠀⠀
+⠀⠀⠀⣀⣀⡙⠳⢿⣞⣿⣿⣿⣮⣵⣂⢗⠀⢄⠀⠀⠀⠀⠹⠀⢀⠄⠪⠐⡒⢈⣠⠴⠾⠚⠋⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠻⣿⣿⣿⣿⣿⡉⢍⠉⠉⢟⠫⢭⡿⡶⠄⢀⣀⠀⣠⠾⢒⠁⠵⣆⠷⢿⡟⡛⠛⠱⠲⠶⢠⣤⣄⣀⣀⠀⠀
+⠀⠀⠀⠀⠉⠛⠛⢛⣻⣾⣦⣦⣤⣁⣂⣑⣿⣿⣿⣿⣷⣾⣶⣿⣿⠟⠁⠀⠀⠀⠉⠒⠫⠄⡀⠀⠀⠉⣉⡿⠛⠀
+⠀⠀⢀⣠⡤⠶⣿⣿⣿⣿⣿⡿⣿⡿⠿⣟⣝⠾⠿⢿⣿⠿⢿⢻⣿⠳⣶⣤⣀⡀⠀⠀⠀⠀⠀⠙⠛⠥⡀⠀⠀⠀
+⠀⠸⠯⠄⣀⠀⠠⠤⠔⠒⠛⠉⠁⠀⠐⡟⠈⠁⠀⠀⠀⠀⠎⣺⠏⠀⠀⠉⠙⠛⠳⠶⠶⢄⣤⣠⡤⠞⠃⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⣄⠀⠀⠀⢀⡠⠞⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠒⠚⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+      </pre>
+    </div>
+  </div>
+</section>
+
+<section id="sobre">
+  <div class="wrap">
+    <span class="eyebrow reveal">01 — Sobre mim</span>
+    <h2 class="reveal" style="font-size:clamp(30px,4.6vw,46px); margin-top:18px;">Tecnologia só importa quando resolve algo real.</h2>
+    <div class="sobre-grid">
+      <div class="reveal">
+        <p>Acredito que a tecnologia só atinge seu potencial máximo quando resolve problemas reais e facilita a vida das pessoas. Sou graduando do bacharelado interdisciplinar em Ciência e Tecnologia, com ênfase em Ciência de Dados, na UFABC, onde desenvolvi um perfil altamente analítico e voltado para a inovação.</p>
+        <p>Na prática, aplico esse conhecimento no meu dia a dia como estagiário de tecnologia na Neosolar, criando automações personalizadas, scripts para o ecossistema Zoho e painéis de monitoramento em tempo real para bancos de dados Oracle no ERP Sankhya.</p>
+      </div>
+      <div class="reveal">
+        <p>Minha jornada é guiada pelo desejo de construir infraestruturas mais inteligentes, transitando desde a engenharia de dados com Python e Java até o interesse crescente por segurança da informação, QA e troubleshooting automatizado com IA.</p>
+        <p>Além da tecnologia, também me dedico a projetos pessoais e criativos — do desenvolvimento front-end com Three.js à produção de conteúdo sobre cultura musical.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="stack" class="band-dark">
+  <div class="wrap">
+    <span class="eyebrow reveal">02 — Stack</span>
+    <h2 class="reveal" style="font-size:clamp(30px,4.6vw,46px); margin-top:18px;">Ferramentas que uso para construir.</h2>
+
+    <div class="stack-grid reveal">
+      <div class="stack-cell">
+        <h3>Dados &amp; IA</h3>
+        <div class="tag-row">
+          <span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">scikit-learn</span>
+          <span class="tag">NetworkX</span><span class="tag">Matplotlib</span><span class="tag">Gemini API</span>
+        </div>
+      </div>
+      <div class="stack-cell">
+        <h3>Backend &amp; ERP</h3>
+        <div class="tag-row">
+          <span class="tag">Java</span><span class="tag">Oracle PL/SQL</span><span class="tag">SQL avançado</span>
+          <span class="tag">Sankhya ERP</span><span class="tag">Eventos Programáveis</span>
+        </div>
+      </div>
+      <div class="stack-cell">
+        <h3>Automação &amp; Integrações</h3>
+        <div class="tag-row">
+          <span class="tag">Celery</span><span class="tag">Zoho Deluge</span><span class="tag">Zoho Flow</span>
+          <span class="tag">Intelipost</span><span class="tag">PontoTel</span>
+        </div>
+      </div>
+      <div class="stack-cell">
+        <h3>Front-end &amp; Criativo</h3>
+        <div class="tag-row">
+          <span class="tag">React</span><span class="tag">Three.js</span><span class="tag">Design de Interface</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projetos">
+  <div class="wrap">
+    <span class="eyebrow reveal">03 — Projetos em destaque</span>
+    <h2 class="reveal" style="font-size:clamp(30px,4.6vw,46px); margin-top:18px;">Do modelo ao chão de produção.</h2>
+
+    <div class="proj-list">
+
+      <div class="proj reveal">
+        <span class="proj-num">01</span>
+        <div class="proj-body">
+          <h3>Classificação de Risco de Crédito</h3>
+          <div class="proj-metric">99% <span>acurácia · AUC-ROC 0.997</span></div>
+          <p>Modelo preditivo de inadimplência bancária construído com Random Forest, Pandas e scikit-learn, com validação estatística rigorosa dos resultados.</p>
+        </div>
+        <a class="proj-link" href="https://github.com/kauan-franca1/apresentacao" target="_blank" rel="noopener">Ver no GitHub →</a>
+      </div>
+
+      <div class="proj reveal">
+        <span class="proj-num">02</span>
+        <div class="proj-body">
+          <h3>Analisador de Logs com IA</h3>
+          <div class="proj-metric">SRE <span>automatizado</span></div>
+          <p>Ferramenta em Python que varre logs de servidor, rankeia exceções (incluindo falhas Oracle) e usa a API do Gemini como assistente de troubleshooting, gerando diagnóstico de causa raiz e plano de mitigação.</p>
+        </div>
+        <a class="proj-link" href="https://github.com/kauan-franca1/apresentacao" target="_blank" rel="noopener">Ver no GitHub →</a>
+      </div>
+
+      <div class="proj reveal">
+        <span class="proj-num">03</span>
+        <div class="proj-body">
+          <h3>Análise de Redes Curriculares — Pesquisa UFABC</h3>
+          <div class="proj-metric">256 <span>arestas mapeadas</span></div>
+          <p>Projeto de pesquisa em Ciência de Dados focado no mapeamento de interdependências curriculares da BNCC, usando NetworkX e Matplotlib para identificar pilares ocultos da aprendizagem via centralidade de grau e intermediação.</p>
+        </div>
+        <a class="proj-link" href="https://github.com/kauan-franca1/apresentacao" target="_blank" rel="noopener">Ver no GitHub →</a>
+      </div>
+
+      <div class="proj reveal">
+        <span class="proj-num">04</span>
+        <div class="proj-body">
+          <h3>Automação da Central de Compras via Eventos Programáveis</h3>
+          <div class="proj-metric">0 <span>preenchimentos manuais incorretos</span></div>
+          <p>Eventos Programáveis em Java integrados nativamente ao ERP Sankhya, interceptando ações de persistência para preencher dinamicamente os campos de Finalidade e Natureza da Operação, consolidando regras de negócio na camada da entidade.</p>
+        </div>
+        <a class="proj-link" href="https://github.com/kauan-franca1/apresentacao" target="_blank" rel="noopener">Ver no GitHub →</a>
+      </div>
+
+      <div class="proj reveal">
+        <span class="proj-num">05</span>
+        <div class="proj-body">
+          <h3>Monitoramento em Tempo Real — ERP Sankhya</h3>
+          <div class="proj-metric">24/7 <span>observabilidade</span></div>
+          <p>Painéis de monitoramento em tempo real sobre banco Oracle, com dashboards de rastreamento de atrasos em rotinas automatizadas e identificação imediata de travamentos, permitindo ações proativas antes que gargalos afetassem o negócio.</p>
+        </div>
+        <a class="proj-link" href="https://github.com/kauan-franca1" target="_blank" rel="noopener">Ver perfil →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="experiencia" class="band-dark">
+  <div class="wrap">
+    <span class="eyebrow reveal">04 — Experiência</span>
+    <h2 class="reveal" style="font-size:clamp(30px,4.6vw,46px); margin-top:18px;">Onde venho aplicando isso.</h2>
+
+    <div class="timeline reveal">
+      <div class="t-item">
+        <span class="t-date">2025 — Atual</span>
+        <h3>Estagiário de Tecnologia — Neosolar</h3>
+        <p>Configuração e desenvolvimento no ERP Sankhya (Java, PL/SQL Oracle), integrações de sistemas (Intelipost, PontoTel, Zoho Flow) e automação de processos internos.</p>
+      </div>
+      <div class="t-item">
+        <span class="t-date">Em andamento</span>
+        <h3>Bacharelado em Ciência e Tecnologia — UFABC</h3>
+        <p>Formação interdisciplinar com ênfase em Ciência de Dados, incluindo pesquisa aplicada em análise de redes complexas e machine learning.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contato">
+  <div class="wrap contato-inner">
+    <span class="eyebrow reveal">05 — Contato</span>
+    <h2 class="reveal">Vamos conversar.</h2>
+    <p class="reveal ink-soft" style="margin-top:16px;">Aberto a oportunidades em análise de dados, engenharia de dados e desenvolvimento. Responder rápido é meu padrão.</p>
+    <div class="contato-actions reveal">
+      <a href="mailto:kauanf380@gmail.com" class="btn btn-accent">Enviar e-mail</a>
+      <a href="https://www.linkedin.com/in/kauan-fran%C3%A7a-294b34359/" target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn</a>
+      <a href="https://github.com/kauan-franca1" target="_blank" rel="noopener" class="btn btn-ghost">GitHub</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Kauan Silva França</span>
+    <span>Feito com Python, café e um pouco de Three.js</span>
+  </div>
+</footer>
+
+<script>
+  // Theme toggle (in-memory, no localStorage)
+  const root = document.documentElement;
+  const toggle = document.getElementById('themeToggle');
+  const icon = document.getElementById('themeIcon');
+  function setIcon(theme){
+    icon.innerHTML = theme === 'dark'
+      ? '<path d="M21 12.6A9 9 0 1 1 11.4 3 7.2 7.2 0 0 0 21 12.6Z"/>'
+      : '<circle cx="12" cy="12" r="4.2"></circle><path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/>';
+  }
+  toggle.addEventListener('click', () => {
+    const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    setIcon(next);
+  });
+
+  // Header scroll state
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Scroll progress -> "current" thread
+  const fill = document.getElementById('currentFill');
+  function updateFill(){
+    const h = document.documentElement;
+    const scrolled = h.scrollTop || document.body.scrollTop;
+    const height = h.scrollHeight - h.clientHeight;
+    const pct = height > 0 ? (scrolled / height) * 100 : 0;
+    fill.style.height = pct + '%';
+  }
+  window.addEventListener('scroll', updateFill);
+  updateFill();
+
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if(entry.isIntersecting){
+        setTimeout(() => entry.target.classList.add('in'), i * 40);
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+
+  // Reveal elements immediately if reduced motion is preferred
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+  }
+</script>
+
+</body>
+</html>
