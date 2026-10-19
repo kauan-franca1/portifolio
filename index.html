@@ -69,6 +69,11 @@ table.t{border-collapse:collapse;width:100%;font-size:15px;font-variant-numeric:
 table.t th,table.t td{text-align:left;padding:8px 12px 8px 0;border-bottom:1px solid var(--line);white-space:nowrap}
 table.t th{color:var(--mut);font-weight:600;font-size:13px}
 table.t tr.hl td{color:var(--red);font-weight:700}
+.em{font-size:14px;line-height:1.5;color:var(--mut);border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin:0 0 14px;max-width:720px}
+.em b{color:var(--ink)}
+.obj{border-color:color-mix(in srgb,var(--blue) 40%,var(--line))}
+.obj h3{margin:0 0 8px;font-size:22px;letter-spacing:-.01em}
+.obj ul{margin:10px 0 0;padding-left:20px;font-size:15px}.obj li{margin:5px 0}
 footer{color:var(--mut);font-size:14px;margin-top:56px;border-top:1px solid var(--line);padding-top:20px}
 footer li{margin:4px 0}
 </style></head><body><main>
@@ -147,6 +152,17 @@ footer li{margin:4px 0}
 <h2>Cenário de investigação.</h2>
 <p class="lead">A água de um rio varia por multiplicação: uma cheia pode ter o dobro ou o triplo da vazão de outra. Exponencial e logaritmo descrevem esse tipo de variação. São três missões com enunciado, função, perguntas e solução, mais uma para aplicar aos seus dados.</p>
 
+<div class="card obj" style="margin-bottom:16px">
+<h3>Objetivo geral</h3>
+<p style="margin:0;max-width:720px">Interpretar a variação da vazão e do volume de água dos grandes rios brasileiros em anos de El Niño, usando funções exponenciais e logarítmicas para descrever, comparar e estimar ordens de grandeza, e reconhecer até onde cada modelo vale.</p>
+<ul>
+<li>Converter cota em vazão (e o inverso) com uma função exponencial e sua inversa.</li>
+<li>Medir o ritmo de esvaziamento de um reservatório com a constante k e a meia-vida.</li>
+<li>Usar a escala logarítmica para testar se um crescimento é exponencial.</li>
+<li>Relacionar o ONI à vazão por regressão em ln e ler o resultado como fator multiplicativo.</li>
+</ul>
+</div>
+
 <div class="card">
 <b>A ideia</b>
 <div class="pair" style="margin-top:12px">
@@ -163,6 +179,7 @@ footer li{margin:4px 0}
 <div class="card mis">
 <h3>Missão 1. A cota é o logaritmo da vazão</h3>
 <p class="tagline">Rio Uruguai em Uruguaiana (RS) · função exponencial e sua inversa</p>
+<div class="em"><b>Ementa.</b> Função exponencial Q = Q₀·e<sup>b·x</sup>; função logarítmica como inversa; número e e logaritmo natural; fator multiplicativo por metro; tempo de dobra ln 2 / b; domínio e imagem; limites de um ajuste com dois pontos.</div>
 <p>A régua mede a cota em metros e a vazão vem de uma tabela. Com dois pontos documentados pelo SGB, ajustamos Q(h) = Q₀·e<sup>b·(h − h₀)</sup>, com h₀ = 7,50 m e Q₀ = 10.942 m³/s (cota de alerta). O segundo ponto é 13,54 m ↔ 31.025 m³/s (20/07/1983, El Niño forte).</p>
 <ol class="q">
 <li>Qual é o valor de <i>b</i> e o que ele significa?</li>
@@ -195,6 +212,7 @@ footer li{margin:4px 0}
 <div class="card mis">
 <h3>Missão 2. Quanto tempo um reservatório aguenta</h3>
 <p class="tagline">Sobradinho (São Francisco) e Balbina (Amazonas) · decaimento exponencial e meia-vida</p>
+<div class="em"><b>Ementa.</b> Decaimento exponencial V = V₀·e<sup>−k·t</sup>; constante k e meia-vida; equações exponenciais resolvidas com logaritmo; domínio (0, +∞) e assíntota vertical do ln; limites do modelo frente à operação do reservatório.</div>
 <p>Sem chuva relevante, o volume útil cai como V(t) = V₀·e<sup>−k·t</sup>. Dois episódios: Sobradinho em 2015 (18,88% em janeiro, menos de 1% em dezembro: 11 meses) e Balbina em 2023–24 (cerca de 100% em mai/2023, cerca de 11% em fev/2024: 9 meses, leitura visual do gráfico do ONS).</p>
 <ol class="q">
 <li>Qual o <i>k</i> de cada um?</li>
@@ -221,6 +239,7 @@ footer li{margin:4px 0}
 <div class="card mis">
 <h3>Missão 3. O El Niño cresce de forma exponencial?</h3>
 <p class="tagline">ONI de mar–mai a jul–set · escala logarítmica como teste</p>
+<div class="em"><b>Ementa.</b> Gráfico em escala logarítmica; crescimento exponencial e saturação; taxa r = ln(razão) e tempo de dobra; domínio do ln (x &gt; 0); leitura crítica de razões entre anomalias.</div>
 <p>Se ONI(t) = ONI₀·e<sup>r·t</sup>, então ln(ONI) é uma reta no tempo. Em escala log, uma reta é crescimento exponencial; uma curva que achata é um crescimento que perde força. O gráfico usa os valores reais da NOAA para cinco eventos.</p>
 <div class="card chart" style="margin:14px 0 0;padding:18px"><svg id="sl" viewBox="0 0 640 300" role="img" aria-label="ONI em escala logarítmica de mar–mai a jul–set para cinco eventos"></svg><div class="leg"><span>Eixo vertical em escala logarítmica (ONI em °C). Linha cinza tracejada: crescimento fixo de ×1,2 por mês.</span></div></div>
 <ol class="q">
@@ -251,6 +270,7 @@ footer li{margin:4px 0}
 <div class="card mis">
 <h3>Missão 4. Aplique aos seus dados</h3>
 <p class="tagline">Regressão log-linear entre o ONI e uma vazão ou volume</p>
+<div class="em"><b>Ementa.</b> Logaritmo de uma razão como diferença de logaritmos; regressão linear em ln; interpretação multiplicativa e<sup>β</sup>; escolha da variável (vazão ou volume, não cota); tratamento de valores fora do domínio.</div>
 <div class="eq">ln(Q / Q̄<sub>mês</sub>) = β · ONI<sub>t−L</sub> + ε</div>
 <div class="eq">Q / Q̄ = e<sup>β · ONI</sup></div>
 <ul class="q" style="padding-left:18px">
