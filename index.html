@@ -145,19 +145,17 @@ footer li{margin:4px 0}
 <li>Em out/2026 os cinco estão entre 61% e 73%, sem crise, antes de uma estação seca com El Niño muito forte.</li></ul></div>
 
 <h2>Cenário de investigação.</h2>
-<p class="lead">O trabalho da UFABC sobre função logarítmica mede o ruído com R(I) = 140 + 10·log(I): a escala em decibéis comprime uma grandeza que varia por potências de 10. Aplicamos a mesma ideia aos rios, com três missões e a mesma estrutura: enunciado, função, perguntas e solução.</p>
+<p class="lead">A água de um rio varia por multiplicação: uma cheia pode ter o dobro ou o triplo da vazão de outra. Exponencial e logaritmo descrevem esse tipo de variação. São três missões com enunciado, função, perguntas e solução, mais uma para aplicar aos seus dados.</p>
 
 <div class="card">
-<b>A analogia</b>
+<b>A ideia</b>
 <div class="pair" style="margin-top:12px">
-<div><div class="cap">Ruído (documento)</div>
-<div class="eq">R = 140 + 10·log(I)</div>
-<div class="eq">I = 10<sup>(R − 140)/10</sup></div>
-<div class="cap">+10 dB multiplica a intensidade por 10.</div></div>
-<div><div class="cap">Rio (Uruguaiana)</div>
-<div class="eq">h = h₀ + (1/b)·ln(Q/Q₀)</div>
+<div><div class="cap">Da cota para a vazão</div>
 <div class="eq">Q = Q₀·e<sup>b·(h − h₀)</sup></div>
 <div class="cap">+4,02 m de cota multiplica a vazão por 2.</div></div>
+<div><div class="cap">Da vazão para a cota</div>
+<div class="eq">h = h₀ + (1/b)·ln(Q/Q₀)</div>
+<div class="cap">Dobrar a vazão soma sempre os mesmos 4,02 m.</div></div>
 </div>
 <p style="margin:12px 0 0;font-size:15px;color:var(--mut)">A régua de um rio já é uma escala logarítmica da vazão: lemos metros, e o que cresce por multiplicação é a água.</p>
 </div>
@@ -180,7 +178,7 @@ footer li{margin:4px 0}
 <div><b id="o-h">9,87 m</b><span>cota</span></div>
 <div><b id="o-q">16.470</b><span>vazão (m³/s)</span></div>
 <div><b id="o-r">1,51×</b><span>vazão de alerta (7,50 m)</span></div>
-<div><b id="o-d">+1,8 dB</b><span>10·log₁₀(Q/Q₀)</span></div>
+<div><b id="o-d">0,59</b><span>vezes que a vazão dobrou (log₂ Q/Q₀)</span></div>
 </div>
 </div>
 
@@ -214,7 +212,7 @@ footer li{margin:4px 0}
 <div class="sol">
 <p><b>1.</b> k = ln(V₀/V) / t. Sobradinho: ln(18,88 / 1) / 11 = 2,938 / 11 = 0,267 por mês, no mínimo, pois o volume terminou abaixo de 1%. Balbina: ln(100 / 11) / 9 = 2,207 / 9 = 0,245 por mês.</p>
 <p><b>2.</b> Sobradinho: 0,693 / 0,267 ≤ 2,6 meses. Balbina: 0,693 / 0,245 = 2,8 meses. O volume cai à metade a cada pouco menos de 3 meses, perdendo 22 a 23% do que resta por mês (1 − e<sup>−k</sup>).</p>
-<p><b>3.</b> t = ln(V₀/V) / k. De 100% a 10%: ln 10 / 0,245 = <b>9,4 meses</b>. De 100% a 1%: ln 100 / 0,245 = <b>18,8 meses</b>. Cada passo de 10× custa o mesmo tempo, como no decibel.</p>
+<p><b>3.</b> t = ln(V₀/V) / k. De 100% a 10%: ln 10 / 0,245 = <b>9,4 meses</b>. De 100% a 1%: ln 100 / 0,245 = <b>18,8 meses</b>. Cada passo de 10× custa o mesmo tempo.</p>
 <p><b>4.</b> ln(V) só existe para V &gt; 0: o domínio do logaritmo é (0, +∞), com assíntota vertical em V = 0. O exponencial se aproxima de zero sem tocá-lo. Balbina chegou a cerca de 0% no início de 2025, e esse ponto não entra na conta.</p>
 <p class="lim">Limite: com vazão de saída fixa, o esvaziamento real é mais próximo de uma reta do que de uma exponencial. Use <i>k</i> como ordem de grandeza do ritmo, não como previsão.</p>
 </div></details>
@@ -275,7 +273,7 @@ footer li{margin:4px 0}
 <ul><li>ONI: NOAA CPC, oni.ascii.txt (valores até jul–set 2026, que podem ser revisados).</li>
 <li>Rio Negro: SGB/Porto de Manaus. Sobradinho: ONS/ANA e dissertação UNIFACS (2016). Ladário: Embrapa e SGB. Paraná: Camilloni &amp; Barros (2000). Uruguai: SGB/ABRH (2023) e MetSul.</li>
 <li>Reservatórios: ONS, Dados Hidrológicos – Volumes (leitura visual do gráfico, jan/2022 a out/2026).</li>
-<li>Cenário de investigação: adaptado de "Cenários para Investigação: Função Logarítmica" (UFABC, 2025), que usa Farias e Santos (2023). Cota e vazão em Uruguaiana: SGB (cota de alerta 750 cm = 10.942 m³/s; 1.354 cm = 31.025 m³/s). O ajuste exponencial entre esses dois pontos é um modelo didático.</li>
+<li>Cota e vazão em Uruguaiana: SGB (cota de alerta 750 cm = 10.942 m³/s; 1.354 cm = 31.025 m³/s). O ajuste exponencial entre esses dois pontos é um modelo didático.</li>
 <li>Previsão: Inmet (Painel El Niño 2026–2027) e NOAA.</li></ul></footer>
 </main>
 <script>
@@ -300,11 +298,11 @@ document.getElementById("lg").innerHTML='<span>Eixo: ONI (°C), por mês central
 var h0=7.5,Q0=10942,b=Math.log(31025/10942)/(13.54-7.5);
 function f(n,d){return n.toLocaleString("pt-BR",{minimumFractionDigits:d,maximumFractionDigits:d})}
 var sl=document.getElementById("hh");
-function upd(){var h=parseFloat(sl.value),Q=Q0*Math.exp(b*(h-h0)),r=Q/Q0,db=10*Math.log10(r);
+function upd(){var h=parseFloat(sl.value),Q=Q0*Math.exp(b*(h-h0)),r=Q/Q0;
 document.getElementById("o-h").textContent=f(h,2)+" m";
 document.getElementById("o-q").textContent=f(Math.round(Q),0);
 document.getElementById("o-r").textContent=f(r,2)+"×";
-document.getElementById("o-d").textContent=(db>=0?"+":"−")+f(Math.abs(db),1)+" dB"}
+document.getElementById("o-d").textContent=f(Math.log2(r),2)}
 sl.addEventListener("input",upd);upd();
 
 var L=["MAM","AMJ","MJJ","JJA","JAS"];
