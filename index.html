@@ -74,6 +74,38 @@ table.t tr.hl td{color:var(--red);font-weight:700}
 .obj{border-color:color-mix(in srgb,var(--blue) 40%,var(--line))}
 .obj h3{margin:0 0 8px;font-size:22px;letter-spacing:-.01em}
 .obj ul{margin:10px 0 0;padding-left:20px;font-size:15px}.obj li{margin:5px 0}
+:root{--c-body:#2a2c31;--c-key:#454851;--c-keyt:#f5f5f7;--c-fn:#33363d;--c-lcd:#cfd8bf;--c-lcdt:#1d2415;--c-shift:#ffd25a;--c-eq:#0066d6}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-top:12px}
+.tile{border:1px solid var(--line);border-radius:16px;padding:14px;background:var(--bg);min-width:0}
+.tile b{display:block;margin-bottom:4px}.tile p{margin:0;font-size:15px}
+.tile.gl{padding:10px 14px}.tile.gl p{font-size:14px;color:var(--mut)}
+kbd{font:600 13px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:var(--c-fn);color:var(--c-keyt);border-radius:6px;padding:2px 7px;white-space:nowrap}
+.calc-tip{font-size:14px;color:var(--mut)}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 16px}
+.tabs button,.ctl button{font:600 14px/1.2 inherit;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:99px;padding:9px 15px;cursor:pointer}
+.tabs button[aria-selected=true],.ctl button.pri{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.tabs button:focus-visible,.ctl button:focus-visible,.kb button:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.ctl{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.calc-wrap{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:22px;align-items:start}
+@media(max-width:720px){.calc-wrap{grid-template-columns:minmax(0,1fr)}}
+.calc{background:var(--c-body);border-radius:24px;padding:16px;max-width:340px;margin:0 auto;box-shadow:0 10px 30px rgba(0,0,0,.18)}
+.lcd{background:var(--c-lcd);color:var(--c-lcdt);border-radius:10px;padding:10px 12px;min-height:84px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;font:600 18px/1.3 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+#cx{word-break:break-all;min-height:24px}#cr{text-align:right;font-size:28px;min-height:36px}
+.kb{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-top:12px}
+.kb button{position:relative;font:600 15px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;border:0;border-radius:10px;min-height:42px;padding:14px 0 6px;background:var(--c-key);color:var(--c-keyt);cursor:pointer}
+.kb button.fn{background:var(--c-fn);font-size:13px}
+.kb button small{position:absolute;top:3px;left:0;right:0;text-align:center;font-size:10px;font-weight:600;color:var(--c-shift)}
+.kb button.kEq{grid-column:1/-1;background:var(--c-eq)}
+.kb button.on{background:var(--c-shift);color:#1d1d1f}
+.kb button.nx{box-shadow:0 0 0 3px var(--c-shift)}
+@media(prefers-reduced-motion:no-preference){.kb button{transition:transform .12s,background .12s}.kb button.on{transform:scale(.92)}.kb button.nx{animation:pl 1.1s ease-in-out infinite}}
+@keyframes pl{0%,100%{box-shadow:0 0 0 2px var(--c-shift)}50%{box-shadow:0 0 0 6px color-mix(in srgb,var(--c-shift) 35%,transparent)}}
+ol.steps{margin:0;padding:0;list-style:none;counter-reset:st}
+ol.steps li{counter-increment:st;padding:7px 10px 7px 38px;position:relative;font-size:15px;border-radius:10px;color:var(--mut)}
+ol.steps li::before{content:counter(st);position:absolute;left:8px;top:7px;width:22px;height:22px;border-radius:50%;border:1px solid var(--line);font-size:12px;font-weight:700;text-align:center;line-height:20px}
+ol.steps li.now{color:var(--ink);font-weight:700;background:color-mix(in srgb,var(--blue) 10%,var(--card))}
+ol.steps li.done{color:var(--mut)}
+ol.steps li.done::before{content:"✓";background:var(--ink);color:var(--bg);border-color:var(--ink)}
 footer{color:var(--mut);font-size:14px;margin-top:56px;border-top:1px solid var(--line);padding-top:20px}
 footer li{margin:4px 0}
 </style></head><body><main>
@@ -150,42 +182,76 @@ footer li{margin:4px 0}
 <li>Em out/2026 os cinco estão entre 61% e 73%, sem crise, antes de uma estação seca com El Niño muito forte.</li></ul></div>
 
 <h2>Cenário de investigação.</h2>
-<p class="lead">A água de um rio varia por multiplicação: uma cheia pode ter o dobro ou o triplo da vazão de outra. Exponencial e logaritmo descrevem esse tipo de variação. São três missões com enunciado, função, perguntas e solução, mais uma para aplicar aos seus dados.</p>
+<p class="lead">Imagine que você é cientista de rios. O El Niño muda a chuva, e a chuva muda a quantidade de água que passa pelos rios e que fica nos reservatórios. Com exponencial, logaritmo e uma calculadora científica dá para medir isso. Comece pelo aquecimento e pelo tutorial da calculadora, depois resolva as missões.</p>
 
 <div class="card obj" style="margin-bottom:16px">
 <h3>Objetivo geral</h3>
-<p style="margin:0;max-width:720px">Interpretar a variação da vazão e do volume de água dos grandes rios brasileiros em anos de El Niño, usando funções exponenciais e logarítmicas para descrever, comparar e estimar ordens de grandeza, e reconhecer até onde cada modelo vale.</p>
+<p style="margin:0;max-width:720px">Entender, com funções exponenciais e logarítmicas, como a quantidade de água dos grandes rios do Brasil muda em anos de El Niño, e saber até onde essas contas valem.</p>
 <ul>
-<li>Converter cota em vazão (e o inverso) com uma função exponencial e sua inversa.</li>
-<li>Medir o ritmo de esvaziamento de um reservatório com a constante k e a meia-vida.</li>
-<li>Usar a escala logarítmica para testar se um crescimento é exponencial.</li>
-<li>Relacionar o ONI à vazão por regressão em ln e ler o resultado como fator multiplicativo.</li>
+<li>Transformar a altura da água na régua (cota) em vazão, e o contrário.</li>
+<li>Calcular em quanto tempo um reservatório perde metade da água.</li>
+<li>Usar o gráfico em escala logarítmica para ver se algo cresce em ritmo constante.</li>
+<li>Ler o resultado como "quantas vezes a vazão muda".</li>
 </ul>
 </div>
 
 <div class="card">
-<b>A ideia</b>
-<div class="pair" style="margin-top:12px">
-<div><div class="cap">Da cota para a vazão</div>
-<div class="eq">Q = Q₀·e<sup>b·(h − h₀)</sup></div>
-<div class="cap">+4,02 m de cota multiplica a vazão por 2.</div></div>
-<div><div class="cap">Da vazão para a cota</div>
-<div class="eq">h = h₀ + (1/b)·ln(Q/Q₀)</div>
-<div class="cap">Dobrar a vazão soma sempre os mesmos 4,02 m.</div></div>
+<b>Aquecimento: quatro ideias</b>
+<div class="tiles">
+<div class="tile"><b>Potência</b><p>2³ = 2 × 2 × 2 = 8. O 3 é o <i>expoente</i>: quantas vezes o 2 se multiplica.</p></div>
+<div class="tile"><b>Logaritmo</b><p>É o caminho de volta. "2 elevado a quanto dá 8?" Resposta: 3. Por isso log₂ 8 = 3. O <b>log</b> da calculadora usa base 10: log 1000 = 3, porque 10³ = 1000.</p></div>
+<div class="tile"><b>O número e e o ln</b><p>e vale cerca de 2,718. O <b>ln</b> é o logaritmo com base e. As teclas <b>eˣ</b> e <b>ln</b> se desfazem: ln(eˣ) = x.</p></div>
+<div class="tile"><b>Crescer por multiplicação</b><p>Dobrar, triplicar, cair pela metade. Em um rio, +4 m de cota deixam a vazão 2 vezes maior. Isso é exponencial.</p></div>
 </div>
-<p style="margin:12px 0 0;font-size:15px;color:var(--mut)">A régua de um rio já é uma escala logarítmica da vazão: lemos metros, e o que cresce por multiplicação é a água.</p>
+<div class="tiles" style="margin-top:12px">
+<div class="tile gl"><b>Cota</b><p>Altura da água na régua do rio, em metros.</p></div>
+<div class="tile gl"><b>Vazão</b><p>Volume de água que passa por segundo, em m³/s.</p></div>
+<div class="tile gl"><b>Volume útil</b><p>Parte do reservatório que pode ser usada, em %.</p></div>
+<div class="tile gl"><b>ONI</b><p>Termômetro do El Niño: quanto o Pacífico está mais quente que o normal, em °C.</p></div>
+</div>
+</div>
+
+<div class="card mis" id="tutorial">
+<h3>Tutorial: calculadora científica</h3>
+<p class="tagline">Escolha uma lição e aperte a tecla que está piscando, ou veja a animação</p>
+<div class="tabs" id="ctabs" role="tablist" aria-label="Lições da calculadora"></div>
+<div class="calc-wrap">
+<div>
+<div class="calc" id="calc" aria-label="Calculadora científica de demonstração">
+<div class="lcd" aria-hidden="true"><div id="cx"></div><div id="cr"></div></div>
+<div class="kb" id="kb"></div>
+</div>
+</div>
+<div>
+<p style="margin:0 0 4px"><b id="cgoal"></b></p>
+<p class="cap" id="cnote" style="margin:0 0 10px"></p>
+<ol class="steps" id="csteps" aria-live="polite"></ol>
+<div class="ctl">
+<button type="button" id="cplay" class="pri">▶ Reproduzir</button>
+<button type="button" id="cnext">Próximo passo</button>
+<button type="button" id="creset">Reiniciar</button>
+</div>
+<p class="cap" id="chint" style="margin:10px 0 0" aria-live="polite">Aperte a tecla que está piscando.</p>
+</div>
+</div>
+<p class="cap" style="margin:14px 0 0">A posição das teclas muda de modelo para modelo, mas os nomes são estes. Em calculadoras antigas, digite o número primeiro e depois aperte a tecla (por exemplo, 2 e depois ln).</p>
 </div>
 
 <div class="card mis">
-<h3>Missão 1. A cota é o logaritmo da vazão</h3>
-<p class="tagline">Rio Uruguai em Uruguaiana (RS) · função exponencial e sua inversa</p>
-<div class="em"><b>Ementa.</b> Função exponencial Q = Q₀·e<sup>b·x</sup>; função logarítmica como inversa; número e e logaritmo natural; fator multiplicativo por metro; tempo de dobra ln 2 / b; domínio e imagem; limites de um ajuste com dois pontos.</div>
-<p>A régua mede a cota em metros e a vazão vem de uma tabela. Com dois pontos documentados pelo SGB, ajustamos Q(h) = Q₀·e<sup>b·(h − h₀)</sup>, com h₀ = 7,50 m e Q₀ = 10.942 m³/s (cota de alerta). O segundo ponto é 13,54 m ↔ 31.025 m³/s (20/07/1983, El Niño forte).</p>
+<h3>Missão 1. A régua do rio e a vazão</h3>
+<p class="tagline">Rio Uruguai em Uruguaiana (RS) · exponencial e logaritmo, um desfazendo o outro</p>
+<div class="em"><b>Ementa.</b> Função exponencial; logaritmo como o caminho de volta; o número e e o ln; quantas vezes a vazão muda por metro; tempo para dobrar; limites de um ajuste com dois pontos.</div>
+<p>Em Uruguaiana, a régua mostra a altura da água (a <b>cota</b>, em metros). A <b>vazão</b>, que é a água que passa por segundo (m³/s), cresce por multiplicação quando a cota sobe. Há dois registros reais do Serviço Geológico do Brasil:</p>
+<ul class="q">
+<li>cota de 7,5 m ↔ vazão de 10.942 m³/s;</li>
+<li>cota de 13,54 m ↔ vazão de 31.025 m³/s (julho de 1983, El Niño forte).</li>
+</ul>
+<p>Vamos usar a regra <b>Q = 10.942 · e<sup>b·(h − 7,5)</sup></b>, em que h é a cota e b é um número que você vai descobrir.</p>
 <ol class="q">
-<li>Qual é o valor de <i>b</i> e o que ele significa?</li>
-<li>Qual a vazão na cota de inundação (8,50 m) e em out/2023 (9,87 m)?</li>
-<li>Quantas vezes a vazão de 1983 (13,58 m) foi maior que a de out/2023?</li>
-<li>Que cota corresponde a 20.000 m³/s?</li>
+<li>Qual é o valor de b? Quantas vezes a vazão cresce a cada metro de cota?</li>
+<li>Qual é a vazão quando a cota está em 9,87 m (out/2023)?</li>
+<li>A vazão de 1983 (cota de 13,58 m) foi quantas vezes a de out/2023?</li>
+<li>Em que cota a vazão é de 20.000 m³/s?</li>
 </ol>
 
 <div class="sim">
@@ -194,60 +260,62 @@ footer li{margin:4px 0}
 <div class="out" id="hhout" aria-live="polite">
 <div><b id="o-h">9,87 m</b><span>cota</span></div>
 <div><b id="o-q">16.470</b><span>vazão (m³/s)</span></div>
-<div><b id="o-r">1,51×</b><span>vazão de alerta (7,50 m)</span></div>
-<div><b id="o-d">0,59</b><span>vezes que a vazão dobrou (log₂ Q/Q₀)</span></div>
+<div><b id="o-r">1,51×</b><span>vezes a vazão de 7,5 m</span></div>
+<div><b id="o-d">0,59</b><span>vezes que a vazão dobrou</span></div>
 </div>
 </div>
 
 <details><summary>Ver a solução</summary>
 <div class="sol">
-<p><b>1.</b> b = ln(31.025 / 10.942) / (13,54 − 7,50) = ln(2,835) / 6,04 = 1,042 / 6,04 ≈ <b>0,1725 por metro</b>. Cada metro a mais multiplica a vazão por e<sup>b</sup> = 1,19 (+18,8%). Para dobrar: Δh = ln 2 / b = <b>4,02 m</b>.</p>
-<p><b>2.</b> Q(8,50) = 10.942·e<sup>0,1725·1,00</sup> ≈ <b>13.000 m³/s</b>. Q(9,87) = 10.942·e<sup>0,1725·2,37</sup> ≈ <b>16.470 m³/s</b>.</p>
-<p><b>3.</b> Q(13,58) / Q(9,87) = e<sup>0,1725·3,71</sup> = e<sup>0,640</sup> ≈ <b>1,90</b>. A cheia de 1983 foi cerca de 1,9 vez a vazão de out/2023, mesmo com a régua só 3,71 m acima.</p>
-<p><b>4.</b> h = 7,50 + ln(20.000 / 10.942) / 0,1725 = 7,50 + 3,50 ≈ <b>11,0 m</b>.</p>
-<p class="lim">Limite: é um ajuste didático com dois pontos. A curva-chave real é uma potência por trechos. O modelo vale entre 7,5 e 13,5 m e dá 31.240 m³/s em 13,58 m, contra 30.786 m³/s publicados pelo SGB (1,5% de diferença).</p>
+<p><b>1.</b> Coloque o segundo registro na regra: 31.025 = 10.942 · e<sup>b·6,04</sup>. Divida os dois lados por 10.942: e<sup>b·6,04</sup> = 2,835. Agora aplique o <b>ln</b> nos dois lados, porque ele desfaz o e: b · 6,04 = ln 2,835 = 1,042. Logo b = 1,042 ÷ 6,04 ≈ <b>0,1725</b>.</p>
+<p class="calc-tip">Na calculadora: <kbd>ln</kbd> 31025 ÷ 10942 <kbd>)</kbd> ÷ 6,04 <kbd>=</kbd> (lição 5)</p>
+<p>A cada metro, a vazão é multiplicada por e<sup>0,1725</sup> = 1,19, ou seja, cresce cerca de 19%. <span class="calc-tip">Calculadora: <kbd>SHIFT</kbd> <kbd>ln</kbd> 0,1725 <kbd>)</kbd> <kbd>=</kbd> (lição 4)</span>. Para dobrar a vazão: ln 2 ÷ 0,1725 ≈ <b>4,02 m</b>.</p>
+<p><b>2.</b> Expoente: 0,1725 · (9,87 − 7,5) = 0,1725 · 2,37 = 0,409. Então e<sup>0,409</sup> = 1,505 e Q = 10.942 · 1,505 ≈ <b>16.470 m³/s</b>.</p>
+<p><b>3.</b> A cota subiu 13,58 − 9,87 = 3,71 m. A vazão ficou multiplicada por e<sup>0,1725·3,71</sup> = e<sup>0,640</sup> ≈ <b>1,9</b>. Quase o dobro.</p>
+<p><b>4.</b> 20.000 = 10.942 · e<sup>0,1725·(h − 7,5)</sup>. Divida por 10.942 e aplique o ln: 0,1725 · (h − 7,5) = ln(20.000 ÷ 10.942) = 0,603. Então h − 7,5 = 0,603 ÷ 0,1725 = 3,50 e <b>h ≈ 11,0 m</b>.</p>
+<p class="lim">Cuidado: é um ajuste didático feito com só dois pontos. A tabela real do rio é mais complicada. A regra serve entre 7,5 m e 13,5 m. Em 13,58 m ela dá 31.240 m³/s, contra 30.786 m³/s oficiais (diferença de 1,5%).</p>
 </div></details>
 </div>
 
 <div class="card mis">
 <h3>Missão 2. Quanto tempo um reservatório aguenta</h3>
-<p class="tagline">Sobradinho (São Francisco) e Balbina (Amazonas) · decaimento exponencial e meia-vida</p>
-<div class="em"><b>Ementa.</b> Decaimento exponencial V = V₀·e<sup>−k·t</sup>; constante k e meia-vida; equações exponenciais resolvidas com logaritmo; domínio (0, +∞) e assíntota vertical do ln; limites do modelo frente à operação do reservatório.</div>
-<p>Sem chuva relevante, o volume útil cai como V(t) = V₀·e<sup>−k·t</sup>. Dois episódios: Sobradinho em 2015 (18,88% em janeiro, menos de 1% em dezembro: 11 meses) e Balbina em 2023–24 (cerca de 100% em mai/2023, cerca de 11% em fev/2024: 9 meses, leitura visual do gráfico do ONS).</p>
+<p class="tagline">Sobradinho (São Francisco) e Balbina (Amazonas) · queda exponencial e meia-vida</p>
+<div class="em"><b>Ementa.</b> Queda exponencial; a constante k; meia-vida; equações exponenciais resolvidas com logaritmo; por que o ln não aceita zero; limites do modelo.</div>
+<p>Sem chuva, o volume útil V (em %) cai pela regra <b>V = V₀ · e<sup>−k·t</sup></b>, em que V₀ é o volume do início, t é o tempo em meses e k diz a rapidez da queda. Dois casos:</p>
+<ul class="q">
+<li><b>Sobradinho, 2015:</b> de 18,88% em janeiro para menos de 1% em dezembro (11 meses).</li>
+<li><b>Balbina, 2023–24:</b> de cerca de 100% em maio para cerca de 11% em fevereiro (9 meses, lido do gráfico do ONS).</li>
+</ul>
 <ol class="q">
-<li>Qual o <i>k</i> de cada um?</li>
-<li>Qual a meia-vida t<sub>½</sub> = ln 2 / k?</li>
-<li>Quanto tempo Balbina leva para ir de 100% a 10%, e de 100% a 1%?</li>
+<li>Qual é o k de cada um? Use k = ln(V₀ ÷ V) ÷ t.</li>
+<li>Qual é a meia-vida, o tempo para o volume cair à metade? Use ln 2 ÷ k.</li>
+<li>Quanto tempo Balbina leva para ir de 100% a 10%, e de 100% a 1%? Use ln(V₀ ÷ V) ÷ k.</li>
 <li>Por que o modelo nunca chega a 0%?</li>
 </ol>
 <div class="tw"><table class="t">
-<thead><tr><th></th><th>k (por mês)</th><th>t<sub>½</sub></th><th>Perda por mês</th></tr></thead>
+<thead><tr><th></th><th>k (por mês)</th><th>Meia-vida</th><th>Perde por mês</th></tr></thead>
 <tbody>
-<tr><td>Sobradinho 2015</td><td>≥ 0,267</td><td>≤ 2,6 meses</td><td>≥ 23%</td></tr>
+<tr><td>Sobradinho 2015</td><td>pelo menos 0,267</td><td>até 2,6 meses</td><td>pelo menos 23%</td></tr>
 <tr><td>Balbina 2023–24</td><td>0,245</td><td>2,8 meses</td><td>22%</td></tr>
 </tbody></table></div>
 <details><summary>Ver a solução</summary>
 <div class="sol">
-<p><b>1.</b> k = ln(V₀/V) / t. Sobradinho: ln(18,88 / 1) / 11 = 2,938 / 11 = 0,267 por mês, no mínimo, pois o volume terminou abaixo de 1%. Balbina: ln(100 / 11) / 9 = 2,207 / 9 = 0,245 por mês.</p>
-<p><b>2.</b> Sobradinho: 0,693 / 0,267 ≤ 2,6 meses. Balbina: 0,693 / 0,245 = 2,8 meses. O volume cai à metade a cada pouco menos de 3 meses, perdendo 22 a 23% do que resta por mês (1 − e<sup>−k</sup>).</p>
-<p><b>3.</b> t = ln(V₀/V) / k. De 100% a 10%: ln 10 / 0,245 = <b>9,4 meses</b>. De 100% a 1%: ln 100 / 0,245 = <b>18,8 meses</b>. Cada passo de 10× custa o mesmo tempo.</p>
-<p><b>4.</b> ln(V) só existe para V &gt; 0: o domínio do logaritmo é (0, +∞), com assíntota vertical em V = 0. O exponencial se aproxima de zero sem tocá-lo. Balbina chegou a cerca de 0% no início de 2025, e esse ponto não entra na conta.</p>
-<p class="lim">Limite: com vazão de saída fixa, o esvaziamento real é mais próximo de uma reta do que de uma exponencial. Use <i>k</i> como ordem de grandeza do ritmo, não como previsão.</p>
+<p><b>1.</b> Sobradinho: k = ln(18,88 ÷ 1) ÷ 11 = 2,938 ÷ 11 = 0,267 por mês. É "pelo menos" porque o volume ficou abaixo de 1%. Balbina: k = ln(100 ÷ 11) ÷ 9 = 2,207 ÷ 9 = 0,245 por mês.</p>
+<p class="calc-tip">Na calculadora: <kbd>ln</kbd> 100 ÷ 11 <kbd>)</kbd> ÷ 9 <kbd>=</kbd></p>
+<p><b>2.</b> Sobradinho: 0,693 ÷ 0,267 = 2,6 meses. Balbina: 0,693 ÷ 0,245 = 2,8 meses. Em menos de 3 meses o reservatório perde metade do que tem.</p>
+<p><b>3.</b> De 100% a 10%: ln 10 ÷ 0,245 = <b>9,4 meses</b>. De 100% a 1%: ln 100 ÷ 0,245 = <b>18,8 meses</b>. Cada queda de 10 vezes leva o mesmo tempo.</p>
+<p><b>4.</b> O ln só existe para números maiores que zero. Tente ln 0 na calculadora: aparece erro. A curva exponencial chega cada vez mais perto de 0 sem tocar. Balbina chegou a cerca de 0% no início de 2025, e esse ponto não entra na conta.</p>
+<p class="lim">Cuidado: quando a água sai sempre na mesma quantidade, a queda real parece mais com uma reta. Use o k só para ter uma ideia da rapidez, não para prever.</p>
 </div></details>
 </div>
 
 <div class="card mis">
-<h3>Missão 3. O El Niño cresce de forma exponencial?</h3>
-<p class="tagline">ONI de mar–mai a jul–set · escala logarítmica como teste</p>
-<div class="em"><b>Ementa.</b> Gráfico em escala logarítmica; crescimento exponencial e saturação; taxa r = ln(razão) e tempo de dobra; domínio do ln (x &gt; 0); leitura crítica de razões entre anomalias.</div>
-<p>Se ONI(t) = ONI₀·e<sup>r·t</sup>, então ln(ONI) é uma reta no tempo. Em escala log, uma reta é crescimento exponencial; uma curva que achata é um crescimento que perde força. O gráfico usa os valores reais da NOAA para cinco eventos.</p>
+<h3>Missão 3. O El Niño cresce em ritmo constante?</h3>
+<p class="tagline">ONI de mar–mai a jul–set · gráfico em escala logarítmica</p>
+<div class="em"><b>Ementa.</b> Escala logarítmica no gráfico; crescimento exponencial; taxa de crescimento r = ln(fator); tempo para dobrar; por que o ln não aceita números negativos.</div>
+<p>Crescer em ritmo constante significa ser multiplicado pelo mesmo número a cada mês (por exemplo, ×1,2). Esse é o crescimento exponencial. No gráfico comum ele vira uma curva que dispara. Na <b>escala logarítmica</b> ele vira uma <b>reta</b>. Se a linha entorta para baixo, o ritmo está diminuindo. Os dados abaixo são reais (NOAA).</p>
 <div class="card chart" style="margin:14px 0 0;padding:18px"><svg id="sl" viewBox="0 0 640 300" role="img" aria-label="ONI em escala logarítmica de mar–mai a jul–set para cinco eventos"></svg><div class="leg"><span>Eixo vertical em escala logarítmica (ONI em °C). Linha cinza tracejada: crescimento fixo de ×1,2 por mês.</span></div></div>
-<ol class="q">
-<li>Qual o fator mensal e a taxa r = ln(ONI<sub>t+1</sub> / ONI<sub>t</sub>) em 2026?</li>
-<li>Qual o tempo de dobra, ln 2 / r, no início e no fim da subida?</li>
-<li>Qual evento se comporta como exponencial?</li>
-<li>Por que os meses com ONI negativo ficaram de fora?</li>
-</ol>
+<p style="margin-top:14px">A tabela mostra quantas vezes o ONI cresceu de uma época para a seguinte (é só dividir cada valor pelo anterior). Em 2026 os valores são 0,46; 0,95; 1,39; 1,80 e 2,16.</p>
 <div class="tw"><table class="t">
 <thead><tr><th>Evento</th><th>MAM→AMJ</th><th>AMJ→MJJ</th><th>MJJ→JJA</th><th>JJA→JAS</th></tr></thead>
 <tbody>
@@ -257,29 +325,34 @@ footer li{margin:4px 0}
 <tr><td>2023</td><td>×2,42</td><td>×1,59</td><td>×1,37</td><td>×1,25</td></tr>
 <tr class="hl"><td>2026</td><td>×2,07</td><td>×1,46</td><td>×1,29</td><td>×1,20</td></tr>
 </tbody></table></div>
+<ol class="q">
+<li>Em 2026, calcule a taxa r = ln(fator) para o primeiro e o último fator.</li>
+<li>Calcule o tempo para dobrar, ln 2 ÷ r, no começo e no fim da subida.</li>
+<li>Qual evento tem uma linha quase reta no gráfico?</li>
+<li>Por que não usamos os meses em que o ONI era negativo?</li>
+</ol>
 <details><summary>Ver a solução</summary>
 <div class="sol">
-<p><b>1.</b> Em 2026 os fatores são 0,95/0,46 = 2,07; 1,39/0,95 = 1,46; 1,80/1,39 = 1,29; 2,16/1,80 = 1,20. As taxas r = ln(fator) são <b>0,73; 0,38; 0,26; 0,18 por mês</b>.</p>
-<p><b>2.</b> Tempo de dobra: ln 2 / 0,73 ≈ <b>0,96 mês</b> no começo e ln 2 / 0,18 ≈ <b>3,8 meses</b> no fim. A taxa caiu a um quarto do valor inicial.</p>
-<p><b>3.</b> Só <b>2015</b> aproxima uma reta: fatores entre 1,14 e 1,21, tempo de dobra de cerca de 3,7 meses do começo ao fim. 1997, 2023 e 2026 partem de ×2,1 a ×2,4 e terminam perto de ×1,2: curvas que achatam, típicas de um crescimento que satura.</p>
-<p><b>4.</b> ln(x) só existe para x &gt; 0. Antes de mar–mai o ONI de 1997 e de 2023 era negativo ou quase zero, então a análise começa onde todos os valores são positivos.</p>
-<p class="lim">Limite: o ONI é uma média móvel de três meses de uma anomalia de temperatura. A razão entre valores depende do ponto de partida, então a taxa descreve a curva e não é uma lei física. Isto também não prevê o pico de 2026.</p>
+<p><b>1.</b> Primeiro fator: 0,95 ÷ 0,46 = 2,07 e r = ln 2,07 = <b>0,73</b>. Último fator: 2,16 ÷ 1,80 = 1,20 e r = ln 1,20 = <b>0,18</b>.</p>
+<p class="calc-tip">Na calculadora: <kbd>ln</kbd> 2,16 ÷ 1,8 <kbd>)</kbd> <kbd>=</kbd></p>
+<p><b>2.</b> No começo: 0,693 ÷ 0,73 ≈ <b>1 mês</b>. No fim: 0,693 ÷ 0,18 ≈ <b>3,8 meses</b>. O ritmo caiu para um quarto.</p>
+<p><b>3.</b> <b>2015</b>: os fatores ficam entre 1,14 e 1,21 e a linha é quase reta. 1997, 2023 e 2026 começam com ×2 ou mais e terminam perto de ×1,2: a linha entorta para baixo, sinal de que o crescimento perde força.</p>
+<p><b>4.</b> O ln de um número negativo não existe. Tente ln(−3) na calculadora (lição 6): aparece erro. Por isso a análise começa nos meses em que o ONI já é positivo.</p>
+<p class="lim">Cuidado: o ONI é uma média de três meses de uma diferença de temperatura, e os fatores dependem do ponto de partida. As contas descrevem a curva e não preveem o pico de 2026.</p>
 </div></details>
 </div>
 
 <div class="card mis">
-<h3>Missão 4. Aplique aos seus dados</h3>
-<p class="tagline">Regressão log-linear entre o ONI e uma vazão ou volume</p>
-<div class="em"><b>Ementa.</b> Logaritmo de uma razão como diferença de logaritmos; regressão linear em ln; interpretação multiplicativa e<sup>β</sup>; escolha da variável (vazão ou volume, não cota); tratamento de valores fora do domínio.</div>
-<div class="eq">ln(Q / Q̄<sub>mês</sub>) = β · ONI<sub>t−L</sub> + ε</div>
-<div class="eq">Q / Q̄ = e<sup>β · ONI</sup></div>
+<h3>Missão 4. Desafio: use seus próprios dados</h3>
+<p class="tagline">Ligar o ONI a uma vazão ou a um volume</p>
+<div class="em"><b>Ementa.</b> Logaritmo de uma divisão; ler o resultado como "quantas vezes"; escolha da variável (vazão ou volume, não cota); valores fora do domínio do ln.</div>
+<p>Com uma tabela de vazão mensal e o ONI, o script faz três coisas: divide a vazão de cada mês pela média daquele mês, aplica o ln nesse resultado e procura um número <b>β</b> que liga o ONI ao resultado.</p>
 <ul class="q" style="padding-left:18px">
-<li>Cada +1 °C de ONI multiplica a vazão por e<sup>β</sup>. Em um El Niño de +2 °C o fator é e<sup>2β</sup>.</li>
-<li>Para saber que ONI explicaria uma vazão 30% acima da média: ONI = ln(1,30) / β.</li>
-<li>O logaritmo trata vazões como multiplicação: a resposta vira "vezes" e o histograma assimétrico vira uma curva simétrica.</li>
-<li>Use vazão ou volume, não cota. A cota já é uma escala logarítmica, e volume zero precisa sair da conta (domínio x &gt; 0).</li>
+<li>O número <b>e<sup>β</sup></b> diz quantas vezes a vazão muda para cada +1 °C de ONI.</li>
+<li>Exemplo: se β = 0,10, então e<sup>0,10</sup> = 1,105: a vazão sobe cerca de 10,5% por °C. Em um El Niño de +2 °C: e<sup>0,20</sup> = 1,22, ou 22% a mais.</li>
+<li>Use vazão ou volume, não cota. A cota já é uma escala logarítmica da vazão. Meses com valor zero ficam de fora, porque o ln não aceita zero.</li>
 </ul>
-<p style="margin:12px 0 0;font-size:15px;color:var(--mut)">O script Python tem agora a opção <b>--log</b>, que calcula a anomalia em ln, o β e o fator e<sup>β</sup> para cada rio.</p>
+<p style="margin:12px 0 0;font-size:15px;color:var(--mut)">No script Python, a opção <b>--log</b> faz esse cálculo para cada rio.</p>
 </div>
 
 <h2>O que vem agora.</h2>
@@ -339,4 +412,57 @@ h+='<path d="'+d+'" fill="none" stroke="'+s.c+'" stroke-width="'+(s.b?4:2)+'" st
 h+='<circle cx="'+x(4)+'" cy="'+y(s.v[4])+'" r="'+(s.b?5:3.5)+'" fill="'+s.c+'"/><text x="'+(x(4)+10)+'" y="'+(y(s.v[4])+4+(s.dy||0))+'" font-size="12" font-weight="'+(s.b?700:500)+'" fill="'+s.c+'">'+s.n+'</text>'});
 var svg=document.getElementById("sl");svg.style.color=getComputedStyle(document.body).color;svg.innerHTML=h;
 })();
-</script></body></html>
+</script><script>
+(function(){
+var G={dec:",",div:"÷",mul:"×",sub:"−",add:"+",pow:"^",lp:"(",rp:")",ln:"ln(",log:"log(",sqrt:"√(",sq:"²",eq:"",del:"",ac:"",shift:""};
+for(var d=0;d<10;d++)G[String(d)]=String(d);
+var LAY=[["shift","SHIFT","fn"],["lp","(","fn"],["rp",")","fn"],["del","DEL","fn"],["ac","AC","fn"],
+["log","log","", "10ˣ"],["ln","ln","","eˣ"],["pow","^","","xʸ"],["sqrt","√","fn"],["sq","x²","fn"],
+["7","7"],["8","8"],["9","9"],["div","÷","fn"],["mul","×","fn"],
+["4","4"],["5","5"],["6","6"],["sub","−","fn"],["add","+","fn"],
+["1","1"],["2","2"],["3","3"],["0","0"],["dec",","],
+["eq","=","kEq"]];
+var N={"31025":["3","1","0","2","5"],"10942":["1","0","9","4","2"],"6,04":["6","dec","0","4"],"0,1725":["0","dec","1","7","2","5"],"1000":["1","0","0","0"]};
+function T(a){return a.split("")}
+var LS=[
+{t:"1 Potência",g:"Calcular 2³. Resultado: 8",n:"A tecla ^ (em alguns modelos xʸ) eleva a base ao expoente.",r:"8",
+ s:[["Digite a base: 2",["2"]],["Aperte ^ (potência)",["pow"]],["Digite o expoente: 3",["3"]],["Aperte =",["eq"]]]},
+{t:"2 log",g:"Calcular log 1000. Resultado: 3",n:"O log da calculadora tem base 10. A pergunta é: 10 elevado a quanto dá 1000?",r:"3",
+ s:[["Aperte log. A calculadora abre log(",["log"]],["Digite 1000",N["1000"]],["Feche o parêntese (em muitos modelos é opcional)",["rp"]],["Aperte =",["eq"]]]},
+{t:"3 ln",g:"Calcular ln 2. Resultado: 0,6931",n:"O ln é o log de base e. A pergunta é: e elevado a quanto dá 2?",r:"0,6931",
+ s:[["Aperte ln. A calculadora abre ln(",["ln"]],["Digite 2",["2"]],["Feche o parêntese",["rp"]],["Aperte =",["eq"]]]},
+{t:"4 eˣ",g:"Calcular e elevado a 0,1725. Resultado: 1,1883",n:"A tecla eˣ é a função amarela escrita em cima do ln. Primeiro SHIFT, depois ln.",r:"1,1883",
+ s:[["Aperte SHIFT",["shift"]],["Aperte ln: com o SHIFT ele vira eˣ",["ln"]],["Digite 0,1725",N["0,1725"]],["Feche o parêntese",["rp"]],["Aperte =",["eq"]]]},
+{t:"5 Conta completa",g:"Calcular ln(31025 ÷ 10942) ÷ 6,04. Resultado: 0,1725",n:"Tudo o que está dentro do ln fica entre parênteses. Depois do ) a conta segue normalmente. A calculadora mostra mais casas; aqui arredondamos.",r:"0,1725",
+ s:[["Aperte ln",["ln"]],["Digite 31025",N["31025"]],["Aperte ÷",["div"]],["Digite 10942",N["10942"]],["Feche o parêntese: aqui o ln termina",["rp"]],["Aperte ÷",["div"]],["Digite 6,04",N["6,04"]],["Aperte =",["eq"]]]},
+{t:"6 Erro",g:"Ver o que acontece com ln(−3)",n:"O logaritmo só existe para números maiores que zero. Com zero ou número negativo, a calculadora mostra erro.",r:"Math ERROR",
+ s:[["Aperte ln",["ln"]],["Aperte − (menos)",["sub"]],["Digite 3",["3"]],["Feche o parêntese",["rp"]],["Aperte =",["eq"]]]}
+];
+var $=function(i){return document.getElementById(i)};
+var kb=$("kb"),tabs=$("ctabs"),cur=0,kpos=0,timer=null,flat=[];
+LAY.forEach(function(k){var b=document.createElement("button");b.type="button";b.setAttribute("data-k",k[0]);b.className=k[2]||"";b.setAttribute("aria-label",k[1]);b.innerHTML=(k[3]?"<small>"+k[3]+"</small>":"")+k[1];kb.appendChild(b)});
+LS.forEach(function(L,i){var b=document.createElement("button");b.type="button";b.setAttribute("role","tab");b.textContent=L.t;b.addEventListener("click",function(){load(i)});tabs.appendChild(b)});
+function keyEl(k){return kb.querySelector('[data-k="'+k+'"]')}
+function build(ks){var e="",sh=false;ks.forEach(function(k){if(k==="shift"){sh=true;return}var g=G[k];if(sh){if(k==="ln")g="e^(";else if(k==="log")g="10^(";sh=false}e+=g});return(sh?"SHIFT ":"")+e}
+function load(i){stop();cur=i;kpos=0;flat=[];$("chint").textContent="Aperte a tecla que está piscando.";LS[i].s.forEach(function(st,si){st[1].forEach(function(k){flat.push({k:k,s:si})})});$("cgoal").textContent=LS[i].g;$("cnote").textContent=LS[i].n;
+ Array.prototype.forEach.call(tabs.children,function(b,j){b.setAttribute("aria-selected",j===i?"true":"false")});render()}
+function render(){var L=LS[cur],done=kpos===flat.length,cs=done?L.s.length:flat[kpos].s;
+ $("cx").textContent=build(flat.slice(0,kpos).map(function(x){return x.k}));$("cr").textContent=done?L.r:"";
+ var h="";L.s.forEach(function(st,i){h+='<li class="'+(i<cs?"done":i===cs?"now":"")+'">'+st[0]+"</li>"});$("csteps").innerHTML=h;
+ Array.prototype.forEach.call(kb.children,function(b){b.classList.remove("nx")});
+ if(!done){var e=keyEl(flat[kpos].k);if(e)e.classList.add("nx")}
+ $("cplay").textContent=timer?"❚❚ Pausar":(done?"↻ Ver de novo":"▶ Reproduzir")}
+function flash(k){var e=keyEl(k);if(!e)return;e.classList.add("on");setTimeout(function(){e.classList.remove("on")},240)}
+function press(){if(kpos>=flat.length)return;flash(flat[kpos].k);kpos++;render()}
+function stop(){if(timer){clearInterval(timer);timer=null}}
+function play(){if(timer){stop();render();return}if(kpos>=flat.length)kpos=0;render();timer=setInterval(function(){if(kpos>=flat.length){stop();render();return}press()},560);render()}
+function nextStep(){stop();if(kpos>=flat.length){kpos=0;render();return}var s=flat[kpos].s;timer=setInterval(function(){if(kpos>=flat.length||flat[kpos].s!==s){stop();render();return}press()},300);render()}
+kb.addEventListener("click",function(ev){var b=ev.target.closest("button");if(!b||timer)return;var k=b.getAttribute("data-k");
+ if(kpos<flat.length&&flat[kpos].k===k){press();$("chint").textContent=kpos===flat.length?"Pronto! Veja o resultado no visor.":"Muito bem. Siga a tecla que pisca."}
+ else{flash(k);$("chint").textContent=kpos>=flat.length?"Lição concluída. Aperte Reiniciar para repetir.":"Tente a tecla que está piscando."}});
+$("cplay").addEventListener("click",play);$("cnext").addEventListener("click",nextStep);
+$("creset").addEventListener("click",function(){stop();kpos=0;$("chint").textContent="Aperte a tecla que está piscando.";render()});
+load(0);
+})();
+</script>
+</body></html>
