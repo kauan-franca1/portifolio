@@ -44,6 +44,31 @@ p.lead{color:var(--mut);margin:0 0 24px;max-width:720px}
 .rs .v{color:var(--mut);text-align:right;font-variant-numeric:tabular-nums}
 .rs .ax{grid-column:2;display:flex;justify-content:space-between;font-size:12px;color:var(--mut)}
 @media(max-width:520px){.rs{grid-template-columns:96px 1fr 40px}}
+.mis{margin-top:16px}
+.mis h3{font-size:clamp(22px,3.6vw,28px);margin:0 0 4px;letter-spacing:-.015em;line-height:1.2;text-wrap:balance}
+.mis .tagline{color:var(--mut);margin:0 0 14px;font-size:15px}
+.mis p{max-width:720px}
+ol.q,ul.q{margin:14px 0;padding-left:22px}.q li{margin:6px 0}
+.eq{font:600 16px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:color-mix(in srgb,var(--blue) 8%,var(--card));border:1px solid var(--line);border-radius:14px;padding:10px 16px;margin:10px 0;overflow-x:auto;max-width:100%}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px 20px}.pair>div{min-width:0}
+@media(max-width:600px){.pair{grid-template-columns:1fr}}
+.sim{margin:16px 0 4px;padding:16px;border:1px solid var(--line);border-radius:18px;background:var(--bg)}
+.sim label{display:block;margin-bottom:8px;font-size:15px}
+input[type=range]{width:100%;accent-color:var(--blue)}
+.out{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-top:12px}
+.out>div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 14px;min-width:0}
+.out b{display:block;font-size:24px;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.out span{font-size:13px;color:var(--mut)}
+details{border-top:1px solid var(--line);margin-top:16px;padding-top:12px}
+summary{cursor:pointer;font-weight:600;color:var(--blue);border-radius:6px}
+summary:focus-visible,input[type=range]:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.sol p{margin:10px 0;font-size:15px}
+.sol .lim{color:var(--mut);border-left:3px solid var(--line);padding-left:12px}
+.tw{overflow-x:auto;max-width:100%;margin-top:6px}
+table.t{border-collapse:collapse;width:100%;font-size:15px;font-variant-numeric:tabular-nums;min-width:420px}
+table.t th,table.t td{text-align:left;padding:8px 12px 8px 0;border-bottom:1px solid var(--line);white-space:nowrap}
+table.t th{color:var(--mut);font-weight:600;font-size:13px}
+table.t tr.hl td{color:var(--red);font-weight:700}
 footer{color:var(--mut);font-size:14px;margin-top:56px;border-top:1px solid var(--line);padding-top:20px}
 footer li{margin:4px 0}
 </style></head><body><main>
@@ -119,6 +144,126 @@ footer li{margin:4px 0}
 <li><b>Machadinho</b> varia de ~9% a 100% em poucos meses: tem pouco armazenamento e reflete a operação, então serve mal para medir efeito do clima.</li>
 <li>Em out/2026 os cinco estão entre 61% e 73%, sem crise, antes de uma estação seca com El Niño muito forte.</li></ul></div>
 
+<h2>Cenário de investigação.</h2>
+<p class="lead">O trabalho da UFABC sobre função logarítmica mede o ruído com R(I) = 140 + 10·log(I): a escala em decibéis comprime uma grandeza que varia por potências de 10. Aplicamos a mesma ideia aos rios, com três missões e a mesma estrutura: enunciado, função, perguntas e solução.</p>
+
+<div class="card">
+<b>A analogia</b>
+<div class="pair" style="margin-top:12px">
+<div><div class="cap">Ruído (documento)</div>
+<div class="eq">R = 140 + 10·log(I)</div>
+<div class="eq">I = 10<sup>(R − 140)/10</sup></div>
+<div class="cap">+10 dB multiplica a intensidade por 10.</div></div>
+<div><div class="cap">Rio (Uruguaiana)</div>
+<div class="eq">h = h₀ + (1/b)·ln(Q/Q₀)</div>
+<div class="eq">Q = Q₀·e<sup>b·(h − h₀)</sup></div>
+<div class="cap">+4,02 m de cota multiplica a vazão por 2.</div></div>
+</div>
+<p style="margin:12px 0 0;font-size:15px;color:var(--mut)">A régua de um rio já é uma escala logarítmica da vazão: lemos metros, e o que cresce por multiplicação é a água.</p>
+</div>
+
+<div class="card mis">
+<h3>Missão 1. A cota é o logaritmo da vazão</h3>
+<p class="tagline">Rio Uruguai em Uruguaiana (RS) · função exponencial e sua inversa</p>
+<p>A régua mede a cota em metros e a vazão vem de uma tabela. Com dois pontos documentados pelo SGB, ajustamos Q(h) = Q₀·e<sup>b·(h − h₀)</sup>, com h₀ = 7,50 m e Q₀ = 10.942 m³/s (cota de alerta). O segundo ponto é 13,54 m ↔ 31.025 m³/s (20/07/1983, El Niño forte).</p>
+<ol class="q">
+<li>Qual é o valor de <i>b</i> e o que ele significa?</li>
+<li>Qual a vazão na cota de inundação (8,50 m) e em out/2023 (9,87 m)?</li>
+<li>Quantas vezes a vazão de 1983 (13,58 m) foi maior que a de out/2023?</li>
+<li>Que cota corresponde a 20.000 m³/s?</li>
+</ol>
+
+<div class="sim">
+<label for="hh"><b>Mova a régua</b> · cota em Uruguaiana</label>
+<input type="range" id="hh" min="6" max="14" step="0.01" value="9.87" aria-describedby="hhout">
+<div class="out" id="hhout" aria-live="polite">
+<div><b id="o-h">9,87 m</b><span>cota</span></div>
+<div><b id="o-q">16.470</b><span>vazão (m³/s)</span></div>
+<div><b id="o-r">1,51×</b><span>vazão de alerta (7,50 m)</span></div>
+<div><b id="o-d">+1,8 dB</b><span>10·log₁₀(Q/Q₀)</span></div>
+</div>
+</div>
+
+<details><summary>Ver a solução</summary>
+<div class="sol">
+<p><b>1.</b> b = ln(31.025 / 10.942) / (13,54 − 7,50) = ln(2,835) / 6,04 = 1,042 / 6,04 ≈ <b>0,1725 por metro</b>. Cada metro a mais multiplica a vazão por e<sup>b</sup> = 1,19 (+18,8%). Para dobrar: Δh = ln 2 / b = <b>4,02 m</b>.</p>
+<p><b>2.</b> Q(8,50) = 10.942·e<sup>0,1725·1,00</sup> ≈ <b>13.000 m³/s</b>. Q(9,87) = 10.942·e<sup>0,1725·2,37</sup> ≈ <b>16.470 m³/s</b>.</p>
+<p><b>3.</b> Q(13,58) / Q(9,87) = e<sup>0,1725·3,71</sup> = e<sup>0,640</sup> ≈ <b>1,90</b>. A cheia de 1983 foi cerca de 1,9 vez a vazão de out/2023, mesmo com a régua só 3,71 m acima.</p>
+<p><b>4.</b> h = 7,50 + ln(20.000 / 10.942) / 0,1725 = 7,50 + 3,50 ≈ <b>11,0 m</b>.</p>
+<p class="lim">Limite: é um ajuste didático com dois pontos. A curva-chave real é uma potência por trechos. O modelo vale entre 7,5 e 13,5 m e dá 31.240 m³/s em 13,58 m, contra 30.786 m³/s publicados pelo SGB (1,5% de diferença).</p>
+</div></details>
+</div>
+
+<div class="card mis">
+<h3>Missão 2. Quanto tempo um reservatório aguenta</h3>
+<p class="tagline">Sobradinho (São Francisco) e Balbina (Amazonas) · decaimento exponencial e meia-vida</p>
+<p>Sem chuva relevante, o volume útil cai como V(t) = V₀·e<sup>−k·t</sup>. Dois episódios: Sobradinho em 2015 (18,88% em janeiro, menos de 1% em dezembro: 11 meses) e Balbina em 2023–24 (cerca de 100% em mai/2023, cerca de 11% em fev/2024: 9 meses, leitura visual do gráfico do ONS).</p>
+<ol class="q">
+<li>Qual o <i>k</i> de cada um?</li>
+<li>Qual a meia-vida t<sub>½</sub> = ln 2 / k?</li>
+<li>Quanto tempo Balbina leva para ir de 100% a 10%, e de 100% a 1%?</li>
+<li>Por que o modelo nunca chega a 0%?</li>
+</ol>
+<div class="tw"><table class="t">
+<thead><tr><th></th><th>k (por mês)</th><th>t<sub>½</sub></th><th>Perda por mês</th></tr></thead>
+<tbody>
+<tr><td>Sobradinho 2015</td><td>≥ 0,267</td><td>≤ 2,6 meses</td><td>≥ 23%</td></tr>
+<tr><td>Balbina 2023–24</td><td>0,245</td><td>2,8 meses</td><td>22%</td></tr>
+</tbody></table></div>
+<details><summary>Ver a solução</summary>
+<div class="sol">
+<p><b>1.</b> k = ln(V₀/V) / t. Sobradinho: ln(18,88 / 1) / 11 = 2,938 / 11 = 0,267 por mês, no mínimo, pois o volume terminou abaixo de 1%. Balbina: ln(100 / 11) / 9 = 2,207 / 9 = 0,245 por mês.</p>
+<p><b>2.</b> Sobradinho: 0,693 / 0,267 ≤ 2,6 meses. Balbina: 0,693 / 0,245 = 2,8 meses. O volume cai à metade a cada pouco menos de 3 meses, perdendo 22 a 23% do que resta por mês (1 − e<sup>−k</sup>).</p>
+<p><b>3.</b> t = ln(V₀/V) / k. De 100% a 10%: ln 10 / 0,245 = <b>9,4 meses</b>. De 100% a 1%: ln 100 / 0,245 = <b>18,8 meses</b>. Cada passo de 10× custa o mesmo tempo, como no decibel.</p>
+<p><b>4.</b> ln(V) só existe para V &gt; 0: o domínio do logaritmo é (0, +∞), com assíntota vertical em V = 0. O exponencial se aproxima de zero sem tocá-lo. Balbina chegou a cerca de 0% no início de 2025, e esse ponto não entra na conta.</p>
+<p class="lim">Limite: com vazão de saída fixa, o esvaziamento real é mais próximo de uma reta do que de uma exponencial. Use <i>k</i> como ordem de grandeza do ritmo, não como previsão.</p>
+</div></details>
+</div>
+
+<div class="card mis">
+<h3>Missão 3. O El Niño cresce de forma exponencial?</h3>
+<p class="tagline">ONI de mar–mai a jul–set · escala logarítmica como teste</p>
+<p>Se ONI(t) = ONI₀·e<sup>r·t</sup>, então ln(ONI) é uma reta no tempo. Em escala log, uma reta é crescimento exponencial; uma curva que achata é um crescimento que perde força. O gráfico usa os valores reais da NOAA para cinco eventos.</p>
+<div class="card chart" style="margin:14px 0 0;padding:18px"><svg id="sl" viewBox="0 0 640 300" role="img" aria-label="ONI em escala logarítmica de mar–mai a jul–set para cinco eventos"></svg><div class="leg"><span>Eixo vertical em escala logarítmica (ONI em °C). Linha cinza tracejada: crescimento fixo de ×1,2 por mês.</span></div></div>
+<ol class="q">
+<li>Qual o fator mensal e a taxa r = ln(ONI<sub>t+1</sub> / ONI<sub>t</sub>) em 2026?</li>
+<li>Qual o tempo de dobra, ln 2 / r, no início e no fim da subida?</li>
+<li>Qual evento se comporta como exponencial?</li>
+<li>Por que os meses com ONI negativo ficaram de fora?</li>
+</ol>
+<div class="tw"><table class="t">
+<thead><tr><th>Evento</th><th>MAM→AMJ</th><th>AMJ→MJJ</th><th>MJJ→JJA</th><th>JJA→JAS</th></tr></thead>
+<tbody>
+<tr><td>1982</td><td>×1,91</td><td>×1,12</td><td>×1,07</td><td>×1,27</td></tr>
+<tr><td>1997</td><td>×2,37</td><td>×1,59</td><td>×1,31</td><td>×1,21</td></tr>
+<tr><td>2015</td><td>×1,21</td><td>×1,14</td><td>×1,21</td><td>×1,20</td></tr>
+<tr><td>2023</td><td>×2,42</td><td>×1,59</td><td>×1,37</td><td>×1,25</td></tr>
+<tr class="hl"><td>2026</td><td>×2,07</td><td>×1,46</td><td>×1,29</td><td>×1,20</td></tr>
+</tbody></table></div>
+<details><summary>Ver a solução</summary>
+<div class="sol">
+<p><b>1.</b> Em 2026 os fatores são 0,95/0,46 = 2,07; 1,39/0,95 = 1,46; 1,80/1,39 = 1,29; 2,16/1,80 = 1,20. As taxas r = ln(fator) são <b>0,73; 0,38; 0,26; 0,18 por mês</b>.</p>
+<p><b>2.</b> Tempo de dobra: ln 2 / 0,73 ≈ <b>0,96 mês</b> no começo e ln 2 / 0,18 ≈ <b>3,8 meses</b> no fim. A taxa caiu a um quarto do valor inicial.</p>
+<p><b>3.</b> Só <b>2015</b> aproxima uma reta: fatores entre 1,14 e 1,21, tempo de dobra de cerca de 3,7 meses do começo ao fim. 1997, 2023 e 2026 partem de ×2,1 a ×2,4 e terminam perto de ×1,2: curvas que achatam, típicas de um crescimento que satura.</p>
+<p><b>4.</b> ln(x) só existe para x &gt; 0. Antes de mar–mai o ONI de 1997 e de 2023 era negativo ou quase zero, então a análise começa onde todos os valores são positivos.</p>
+<p class="lim">Limite: o ONI é uma média móvel de três meses de uma anomalia de temperatura. A razão entre valores depende do ponto de partida, então a taxa descreve a curva e não é uma lei física. Isto também não prevê o pico de 2026.</p>
+</div></details>
+</div>
+
+<div class="card mis">
+<h3>Missão 4. Aplique aos seus dados</h3>
+<p class="tagline">Regressão log-linear entre o ONI e uma vazão ou volume</p>
+<div class="eq">ln(Q / Q̄<sub>mês</sub>) = β · ONI<sub>t−L</sub> + ε</div>
+<div class="eq">Q / Q̄ = e<sup>β · ONI</sup></div>
+<ul class="q" style="padding-left:18px">
+<li>Cada +1 °C de ONI multiplica a vazão por e<sup>β</sup>. Em um El Niño de +2 °C o fator é e<sup>2β</sup>.</li>
+<li>Para saber que ONI explicaria uma vazão 30% acima da média: ONI = ln(1,30) / β.</li>
+<li>O logaritmo trata vazões como multiplicação: a resposta vira "vezes" e o histograma assimétrico vira uma curva simétrica.</li>
+<li>Use vazão ou volume, não cota. A cota já é uma escala logarítmica, e volume zero precisa sair da conta (domínio x &gt; 0).</li>
+</ul>
+<p style="margin:12px 0 0;font-size:15px;color:var(--mut)">O script Python tem agora a opção <b>--log</b>, que calcula a anomalia em ln, o β e o fator e<sup>β</sup> para cada rio.</p>
+</div>
+
 <h2>O que vem agora.</h2>
 <div class="card now"><b>Previsão oficial para o fim de 2026</b>
 <ul><li>Inmet e NOAA dão cerca de <b>95%</b> de chance de El Niño <b>muito forte</b> em out–dez, persistindo ao menos até o início de 2027.</li>
@@ -130,6 +275,7 @@ footer li{margin:4px 0}
 <ul><li>ONI: NOAA CPC, oni.ascii.txt (valores até jul–set 2026, que podem ser revisados).</li>
 <li>Rio Negro: SGB/Porto de Manaus. Sobradinho: ONS/ANA e dissertação UNIFACS (2016). Ladário: Embrapa e SGB. Paraná: Camilloni &amp; Barros (2000). Uruguai: SGB/ABRH (2023) e MetSul.</li>
 <li>Reservatórios: ONS, Dados Hidrológicos – Volumes (leitura visual do gráfico, jan/2022 a out/2026).</li>
+<li>Cenário de investigação: adaptado de "Cenários para Investigação: Função Logarítmica" (UFABC, 2025), que usa Farias e Santos (2023). Cota e vazão em Uruguaiana: SGB (cota de alerta 750 cm = 10.942 m³/s; 1.354 cm = 31.025 m³/s). O ajuste exponencial entre esses dois pontos é um modelo didático.</li>
 <li>Previsão: Inmet (Painel El Niño 2026–2027) e NOAA.</li></ul></footer>
 </main>
 <script>
@@ -147,5 +293,32 @@ h+='<path d="'+d+'" fill="none" stroke="'+s.c+'" stroke-width="'+(s.b?4:2)+'" st
 h+='<circle cx="'+x(7)+'" cy="'+y(s.v[7])+'" r="'+(s.b?5:3.5)+'" fill="'+s.c+'"/><text x="'+(x(7)+10)+'" y="'+(y(s.v[7])+4)+'" font-size="12" font-weight="'+(s.b?700:500)+'" fill="'+s.c+'">'+s.n+'</text>'});
 var svg=document.getElementById("ch");svg.style.color=getComputedStyle(document.body).color;svg.innerHTML=h;
 document.getElementById("lg").innerHTML='<span>Eixo: ONI (°C), por mês central do trimestre</span><span><i style="background:#d1495b"></i>Linha tracejada: limiar de El Niño (+0,5)</span>';
+})();
+</script>
+<script>
+(function(){
+var h0=7.5,Q0=10942,b=Math.log(31025/10942)/(13.54-7.5);
+function f(n,d){return n.toLocaleString("pt-BR",{minimumFractionDigits:d,maximumFractionDigits:d})}
+var sl=document.getElementById("hh");
+function upd(){var h=parseFloat(sl.value),Q=Q0*Math.exp(b*(h-h0)),r=Q/Q0,db=10*Math.log10(r);
+document.getElementById("o-h").textContent=f(h,2)+" m";
+document.getElementById("o-q").textContent=f(Math.round(Q),0);
+document.getElementById("o-r").textContent=f(r,2)+"×";
+document.getElementById("o-d").textContent=(db>=0?"+":"−")+f(Math.abs(db),1)+" dB"}
+sl.addEventListener("input",upd);upd();
+
+var L=["MAM","AMJ","MJJ","JJA","JAS"];
+var S=[{n:"1982",c:"#8e8e93",v:[.34,.65,.73,.78,.99]},{n:"1997",c:"#bf5af2",v:[.30,.71,1.13,1.48,1.79],dy:-5},{n:"2015",c:"#ff9f0a",v:[.86,1.04,1.19,1.44,1.73],dy:10},{n:"2023",c:"#30b0c7",v:[.19,.46,.73,1,1.25]},{n:"2026",c:"#d1495b",v:[.46,.95,1.39,1.8,2.16],b:1}];
+var W=640,H=300,l=48,r=64,t=14,bm=30,lo=Math.log(.15),hi=Math.log(2.6);
+function x(i){return l+i*(W-l-r)/4}function y(v){return t+(hi-Math.log(v))*(H-t-bm)/(hi-lo)}
+var h="";
+[.2,.5,1,2].forEach(function(v){h+='<line x1="'+l+'" x2="'+(W-r)+'" y1="'+y(v)+'" y2="'+y(v)+'" stroke="currentColor" opacity=".14"/><text x="'+(l-8)+'" y="'+(y(v)+4)+'" text-anchor="end" font-size="11" fill="currentColor" opacity=".65">'+f(v,1)+'</text>'});
+L.forEach(function(m,i){h+='<text x="'+x(i)+'" y="'+(H-8)+'" text-anchor="middle" font-size="11" fill="currentColor" opacity=".65">'+m+'</text>'});
+var ref=[0,1,2,3,4].map(function(i){return(i?"L":"M")+x(i).toFixed(1)+" "+y(.25*Math.pow(1.2,i)).toFixed(1)}).join("");
+h+='<path d="'+ref+'" fill="none" stroke="currentColor" stroke-dasharray="5 5" opacity=".45"/><text x="'+(x(4)+8)+'" y="'+(y(.25*Math.pow(1.2,4))+4)+'" font-size="11" fill="currentColor" opacity=".65">×1,2/mês</text>';
+S.forEach(function(s){var d=s.v.map(function(v,i){return(i?"L":"M")+x(i).toFixed(1)+" "+y(v).toFixed(1)}).join("");
+h+='<path d="'+d+'" fill="none" stroke="'+s.c+'" stroke-width="'+(s.b?4:2)+'" stroke-linecap="round" stroke-linejoin="round"/>';
+h+='<circle cx="'+x(4)+'" cy="'+y(s.v[4])+'" r="'+(s.b?5:3.5)+'" fill="'+s.c+'"/><text x="'+(x(4)+10)+'" y="'+(y(s.v[4])+4+(s.dy||0))+'" font-size="12" font-weight="'+(s.b?700:500)+'" fill="'+s.c+'">'+s.n+'</text>'});
+var svg=document.getElementById("sl");svg.style.color=getComputedStyle(document.body).color;svg.innerHTML=h;
 })();
 </script></body></html>
